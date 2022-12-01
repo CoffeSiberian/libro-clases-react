@@ -1,8 +1,10 @@
+import RoutePage from "./routes/Routes";
+
 const App = () => {
 	return (
-		<div>
-			<p>hola mundo</p>
-		</div>
+		<>
+			<RoutePage />
+		</>
 	);
 };
 
