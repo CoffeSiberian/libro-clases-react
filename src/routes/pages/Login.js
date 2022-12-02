@@ -1,17 +1,47 @@
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import LoadingButton from "@mui/lab/LoadingButton";
 import testlogo from "../../static/img/testlogo.webp";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState } from "react";
+import LoginButton from "../../components/LoginButton";
 
 const Login = () => {
+	const baseData = {
+		rut: "",
+		pass: "",
+	};
+	const baseErrData = {
+		rut: false,
+		pass: false,
+	};
+
 	const [togglePass, setTogglePass] = useState("password");
+	const [data, setData] = useState(baseData);
+	const [dataErr, setDataErr] = useState(baseErrData);
 
 	const checkTogglePass = (event) => {
 		let status = event.target.checked;
 		if (status) setTogglePass("text");
 		else setTogglePass("password");
+	};
+
+	const handleChangeText = (event) => {
+		let eId = event.target.attributes.id.value;
+		let eValue = event.target.value;
+		setData({ ...data, [eId]: eValue });
+	};
+
+	const checkTextError = () => {
+		let err = {};
+		let returnErr = false;
+		for (let r in data) {
+			if (data[r].length === 0) {
+				err[r] = true;
+				returnErr = true;
+			} else err[r] = false;
+		}
+		setDataErr(err);
+		return returnErr;
 	};
 
 	return (
@@ -25,23 +55,35 @@ const Login = () => {
 				/>
 			</div>
 
-			<div className="flex flex-col space-y-4 p-5 w-5/6 md:w-3/6">
-				<TextField required id="user" label="RUT" type="text" />
-				<TextField required id="pass" label="Contraseña" type={togglePass} />
+			<div className="flex flex-col space-y-4 p-5 w-4/5 md:w-1/4">
+				<TextField
+					required
+					id="rut"
+					value={data.rut}
+					onChange={handleChangeText}
+					error={dataErr.rut}
+					label="RUT"
+					type="text"
+				/>
+				<TextField
+					required
+					id="pass"
+					value={data.pass}
+					onChange={handleChangeText}
+					error={dataErr.pass}
+					label="Contraseña"
+					type={togglePass}
+				/>
 				<FormControlLabel
 					onChange={checkTogglePass}
 					control={<Checkbox />}
 					label="Ver contraseña"
 				/>
 				<div className="grid justify-items-center">
-					<LoadingButton
-						className="w-2/3 md:w-1/3"
-						variant="contained"
-						size="medium"
-						loading={false}
-					>
-						Iniciar seccion
-					</LoadingButton>
+					<LoginButton
+						checkTextError={checkTextError}
+						data={data}
+					></LoginButton>
 				</div>
 			</div>
 		</div>
