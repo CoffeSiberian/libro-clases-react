@@ -12,12 +12,7 @@ const dataFetch = async (body = null, method, headers, url) => {
 	}
 };
 
-const getFetch = async (body = null, headers, url) => {
-	return await dataFetch(body, "GET", headers, url);
+const fetchData = async (body = null, method, headers, url) => {
+	return await dataFetch(body, method, headers, url);
 };
-
-const putFetch = async (body = null, headers, url) => {
-	return await dataFetch(body, "PUT", headers, url);
-};
-
-export { getFetch, putFetch };
+export { fetchData };

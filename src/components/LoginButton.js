@@ -3,19 +3,21 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import SendIcon from "@mui/icons-material/Send";
 import useFetch from "../hooks/useFetch";
 import AlertModal from "./AlertModal";
+import SnackBarCom from "./SnackBarCom";
 
 const SubmitButton = ({ checkTextError, data }) => {
 	const [openEmpyData, setOpenEmpyData] = useState(false);
 	const { loading, error, succes, bodySet, setError, setSucces } = useFetch(
-		"http://127.0.0.1/login"
+		"http://127.0.0.1:8443/login",
+		"POST"
 	);
 
 	const dataEmpyToSend = async () => {
-		if (checkTextError()) {
-			return setOpenEmpyData(true);
-		}
+		if (checkTextError()) return setOpenEmpyData(true);
 		let fetchResponse = await bodySet(data);
 		if (fetchResponse.ok) {
+			let token = await fetchResponse.json()
+			localStorage.setItem("token", token["token"]);
 		}
 	};
 
@@ -33,8 +35,13 @@ const SubmitButton = ({ checkTextError, data }) => {
 				handleClose={() => setError(false)}
 				open={error}
 			/>
+			<SnackBarCom
+				msj="Sesion iniciada con éxito"
+				severity="success"
+				open={succes}
+				setOpen={setSucces}
+			/>
 			<LoadingButton
-				className="w-5/6"
 				endIcon={<SendIcon />}
 				loading={loading}
 				loadingPosition="end"

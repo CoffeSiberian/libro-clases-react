@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { putFetch } from "../helpers/dataFetch";
+import { fetchData } from "../helpers/dataFetch";
 
-const useFetch = (url) => {
+const useFetch = (url, method) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [succes, setSucces] = useState(false);
 
-	const putData = async (bodyObj) => {
+	const data = async (bodyObj) => {
 		setLoading(true);
-		let dataResponse = await putFetch(
+		let dataResponse = await fetchData(
 			bodyObj,
+			method,
 			{ "Content-Type": "application/json" },
 			url
 		);
@@ -20,7 +21,7 @@ const useFetch = (url) => {
 		return dataResponse;
 	};
 	const bodySet = async (obj) => {
-		return await putData(JSON.stringify(obj));
+		return await data(JSON.stringify(obj));
 	};
 	return { loading, error, succes, bodySet, setError, setSucces };
 };
