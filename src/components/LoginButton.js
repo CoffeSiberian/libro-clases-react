@@ -1,22 +1,23 @@
 import { useState } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
-import SendIcon from "@mui/icons-material/Send";
 import useFetch from "../hooks/useFetch";
+import LoginIcon from '@mui/icons-material/Login';
 import AlertModal from "./AlertModal";
 import SnackBarCom from "./SnackBarCom";
 
 const SubmitButton = ({ checkTextError, data }) => {
 	const [openEmpyData, setOpenEmpyData] = useState(false);
 	const { loading, error, succes, bodySet, setError, setSucces } = useFetch(
-		"http://127.0.0.1:8443/login",
-		"POST"
+		`${process.env.REACT_APP_APIURL}/login`,
+		"POST",
+		{ "Content-Type": "application/json" }
 	);
 
 	const dataEmpyToSend = async () => {
 		if (checkTextError()) return setOpenEmpyData(true);
 		let fetchResponse = await bodySet(data);
 		if (fetchResponse.ok) {
-			let token = await fetchResponse.json()
+			let token = await fetchResponse.json();
 			localStorage.setItem("token", token["token"]);
 		}
 	};
@@ -42,7 +43,7 @@ const SubmitButton = ({ checkTextError, data }) => {
 				setOpen={setSucces}
 			/>
 			<LoadingButton
-				endIcon={<SendIcon />}
+				endIcon={<LoginIcon />}
 				loading={loading}
 				loadingPosition="end"
 				variant="contained"

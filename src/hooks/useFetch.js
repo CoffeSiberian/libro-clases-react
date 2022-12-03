@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { fetchData } from "../helpers/dataFetch";
 
-const useFetch = (url, method) => {
+const useFetch = (url, method, heder) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [succes, setSucces] = useState(false);
@@ -11,7 +11,7 @@ const useFetch = (url, method) => {
 		let dataResponse = await fetchData(
 			bodyObj,
 			method,
-			{ "Content-Type": "application/json" },
+			heder,
 			url
 		);
 		if (!(await dataResponse.ok)) {
