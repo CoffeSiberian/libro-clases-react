@@ -17,7 +17,7 @@ const Heder = () => {
 					<div className="md:flex hidden w-full justify-end md:justify-center">
 						<img className="object-cover" src={testlogo} alt="dcicon" />
 					</div>
-					<div className="flex justify-end w-full items-center">
+					<div className="flex justify-end w-full items-center space-x-2">
 						<Divider orientation="vertical" />
 						<DropProfile />
 					</div>
