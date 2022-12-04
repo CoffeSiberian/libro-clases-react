@@ -3,7 +3,7 @@ import Error404 from "./pages/Error404";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ValidUser from "../components/ValidUser";
-import { getLocalToken } from "../helpers/validateToken";
+import Heder from "../components/Heder";
 
 const RoutePage = () => {
 	return (
@@ -13,7 +13,8 @@ const RoutePage = () => {
 				<Route
 					path="/dashboard"
 					element={
-						<ValidUser localToken={getLocalToken()}>
+						<ValidUser>
+							<Heder />
 							<Dashboard />
 						</ValidUser>
 					}
