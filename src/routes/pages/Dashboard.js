@@ -6,24 +6,6 @@ import addLess from "../../static/img/addLess.png";
 import addStud from "../../static/img/addStud.png";
 import viewGrad from "../../static/img/viewGrad.png";
 
-const jwt_obj = jwt_decode(localStorage.getItem("token"));
-const user_name = jwt_obj.name;
-const user_rank = jwt_obj.rank;
-const user_rut = jwt_obj.rut;
-
-const rankName = () => {
-	switch (user_rank) {
-		case 10:
-			return "Director";
-		case 2:
-			return "Inspector";
-		case 1:
-			return "Profesor";
-		default:
-			return "";
-	}
-};
-
 const Director = [
 	{
 		name: "Empleados",
@@ -85,6 +67,24 @@ const testImg =
 	"https://cdn.discordapp.com/avatars/405916575216959498/53a88dfe3e95a475d235c63953e5e28f.png?size=1024";
 
 const Dashboard = () => {
+	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const user_name = jwt_obj.name;
+	const user_rank = jwt_obj.rank;
+	const user_rut = jwt_obj.rut;
+
+	const rankName = () => {
+		switch (user_rank) {
+			case 10:
+				return "Director";
+			case 2:
+				return "Inspector";
+			case 1:
+				return "Profesor";
+			default:
+				return "";
+		}
+	};
+	
 	return (
 		<div>
 			<div className="flex justify-center items-center flex-col p-3 md:flex-row">

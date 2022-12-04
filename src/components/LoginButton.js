@@ -4,12 +4,11 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import useFetch from "../hooks/useFetch";
 import LoginIcon from "@mui/icons-material/Login";
 import AlertModal from "./AlertModal";
-import SnackBarCom from "./SnackBarCom";
 
 const SubmitButton = ({ checkTextError, data }) => {
 	const navigate = useNavigate();
 	const [openEmpyData, setOpenEmpyData] = useState(false);
-	const { loading, error, succes, bodySet, setError, setSucces } = useFetch(
+	const { loading, error, bodySet, setError } = useFetch(
 		`${process.env.REACT_APP_APIURL}/login`,
 		"POST",
 		{ "Content-Type": "application/json" }
@@ -34,16 +33,10 @@ const SubmitButton = ({ checkTextError, data }) => {
 				open={openEmpyData}
 			/>
 			<AlertModal
-				title="No pudimos enviar el formulario"
-				description="Verifica tu conexion a internet o intenta mas tarde"
+				title="Error"
+				description="Intenta mas tarde"
 				handleClose={() => setError(false)}
 				open={error}
-			/>
-			<SnackBarCom
-				msj="Sesion iniciada con éxito"
-				severity="success"
-				open={succes}
-				setOpen={setSucces}
 			/>
 			<LoadingButton
 				endIcon={<LoginIcon />}

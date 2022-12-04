@@ -1,13 +1,14 @@
 import { useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import { getLocalToken } from "../helpers/validateToken";
 
-const ValidUser = ({ localToken, children }) => {
+const ValidUser = ({ children }) => {
 	const { bodySet } = useFetch(
 		`${process.env.REACT_APP_APIURL}/validate`,
 		"POST",
 		{
-			Authorization: `Bearer ${localToken}`,
+			Authorization: `Bearer ${getLocalToken()}`,
 		}
 	);
 	const loaded = useRef(false);
