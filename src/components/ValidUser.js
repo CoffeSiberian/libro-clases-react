@@ -18,12 +18,12 @@ const ValidUser = ({ localToken, children }) => {
 		if (fetchResponse.status === 200) return (aut.current = true);
 		return (aut.current = false);
 	};
-	
+
 	useEffect(() => {
 		if (!loaded.current) {
 			validateToken();
 			loaded.current = true;
-		}
+		} // eslint-disable-next-line
 	}, []);
 
 	if (aut.current === false) {

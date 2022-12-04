@@ -13,7 +13,7 @@ const RoutePage = () => {
 				<Route
 					path="/dashboard"
 					element={
-						<ValidUser localToken={getLocalToken()} >
+						<ValidUser localToken={getLocalToken()}>
 							<Dashboard />
 						</ValidUser>
 					}

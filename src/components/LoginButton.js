@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoadingButton from "@mui/lab/LoadingButton";
 import useFetch from "../hooks/useFetch";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 import AlertModal from "./AlertModal";
 import SnackBarCom from "./SnackBarCom";
 
 const SubmitButton = ({ checkTextError, data }) => {
+	const navigate = useNavigate();
 	const [openEmpyData, setOpenEmpyData] = useState(false);
 	const { loading, error, succes, bodySet, setError, setSucces } = useFetch(
 		`${process.env.REACT_APP_APIURL}/login`,
@@ -19,6 +21,7 @@ const SubmitButton = ({ checkTextError, data }) => {
 		if (fetchResponse.ok) {
 			let token = await fetchResponse.json();
 			localStorage.setItem("token", token["token"]);
+			navigate("/dashboard", { replace: true });
 		}
 	};
 
