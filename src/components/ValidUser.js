@@ -2,9 +2,10 @@ import { useRef, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { getLocalToken } from "../helpers/validateToken";
+import ModalLoading from "./ModalLoading";
 
 const ValidUser = ({ children }) => {
-	const { bodySet } = useFetch(
+	const { bodySet, loading } = useFetch(
 		`${process.env.REACT_APP_APIURL}/validate`,
 		"POST",
 		{
@@ -29,7 +30,7 @@ const ValidUser = ({ children }) => {
 
 	if (aut.current === false) {
 		return <Navigate to={"/login"} replace={true} />;
-	} else if (aut.current === null) return <h1>loading...</h1>;
+	} else if (aut.current === null) return <ModalLoading open={loading} />;
 	return children;
 };
 

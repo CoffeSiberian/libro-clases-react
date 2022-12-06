@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import ItemEmployee from "../../components/ItemEmployee";
+import AddEmployee from "../../components/ModalsForms/AddEmployee";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Employes = () => {
 	const loaded = useRef(false);
 	const [listEmployees, setListEmployees] = useState(false);
 
-	const { loading, error, bodySet, setError } = useFetch(
+	const { bodySet } = useFetch(
 		`${process.env.REACT_APP_APIURL}/getallemployee`,
 		"GET",
 		{
@@ -19,8 +21,7 @@ const Employes = () => {
 	const getEmployees = async () => {
 		let fetchResponse = await bodySet();
 		if (fetchResponse.status === 200) {
-			setListEmployees(await fetchResponse.json());
-			return;
+			return setListEmployees(await fetchResponse.json());
 		}
 		return setListEmployees(false);
 	};
@@ -34,6 +35,7 @@ const Employes = () => {
 
 	return (
 		<div>
+			<AddEmployee reload={getEmployees} />
 			<div className="p-2">
 				{listEmployees !== false ? (
 					listEmployees.map((data) => (
@@ -47,7 +49,9 @@ const Employes = () => {
 						</div>
 					))
 				) : (
-					<></>
+					<div className="flex justify-center p-2">
+						<CircularProgress />
+					</div>
 				)}
 			</div>
 		</div>
