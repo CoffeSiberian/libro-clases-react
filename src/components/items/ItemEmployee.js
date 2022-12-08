@@ -16,55 +16,49 @@ const ItemEmployee = ({ name, rut, rank }) => {
 		}
 	};
 	return (
-		<div className="flex flex-col items-center md:flex-row md:justify-between shadow-xl p-1 border-2 border-inherit rounded-md">
-			<Avatar />
+		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
+			<div className="flex justify-center">
+				<Avatar />
+			</div>
+
+			<div className="grid grid-cols-2 items-center">
+				<Typography className="text-right" variant="subtitle1">
+					RUT:
+				</Typography>
+				<div className="ml-2">
+					<Typography variant="body2">{rut}</Typography>
+				</div>
+			</div>
 
 			<Divider
-				className="hidden md:flex"
-				orientation="vertical"
-				variant="middle"
-				flexItem
-			/>
-
-			<Typography className="md:w-1/4" variant="subtitle1">
-				{name}
-			</Typography>
-
-			<Divider
-				className="hidden md:flex"
-				orientation="vertical"
-				variant="middle"
-				flexItem
-			/>
-
-			<Divider
-				className="flex md:hidden"
+				className="flexn"
 				orientation="horizontal"
 				variant="middle"
 				flexItem
 			/>
-
-			<Typography className="md:w-1/4" variant="subtitle1">
-				{rut}
-			</Typography>
-
-			<Divider
-				className="hidden md:flex"
-				orientation="vertical"
-				variant="middle"
-				flexItem
-			/>
+			<div className="grid grid-cols-2 items-center">
+				<Typography className="text-right" variant="subtitle1">
+					Nombre:
+				</Typography>
+				<div className="ml-2">
+					<Typography variant="body2">{name}</Typography>
+				</div>
+			</div>
 
 			<Divider
-				className="flex md:hidden"
+				className="flex"
 				orientation="horizontal"
 				variant="middle"
 				flexItem
 			/>
-
-			<Typography className="md:w-1/4" variant="subtitle1">
-				{rankName()}
-			</Typography>
+			<div className="grid grid-cols-2 items-center">
+				<Typography className="text-right" variant="subtitle1">
+					Rango:
+				</Typography>
+				<div className="ml-2">
+					<Typography variant="body2">{rankName()}</Typography>
+				</div>
+			</div>
 		</div>
 	);
 };

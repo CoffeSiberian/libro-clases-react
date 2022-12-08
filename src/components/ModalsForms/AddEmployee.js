@@ -87,7 +87,7 @@ const AddEmployee = ({ reload }) => {
 			<Typography className="md:hidden flex justify-center" variant="h5">
 				Empleados
 			</Typography>
-			<div className="flex justify-between p-2">
+			<div className="flex items-center justify-between mt-3 mr-3">
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"

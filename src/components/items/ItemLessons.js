@@ -53,10 +53,12 @@ const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
 			<Typography className="text-center" variant="subtitle1">
 				Profesor
 			</Typography>
-
-			<Typography className="text-center" variant="body2">{EmployeeRut}</Typography>
-
-			<Typography className="text-center" variant="body2">{EmployeeName}</Typography>
+			<Typography className="text-center" variant="body2">
+				{EmployeeRut}
+			</Typography>
+			<Typography className="text-center" variant="body2">
+				{EmployeeName}
+			</Typography>
 		</div>
 	);
 };

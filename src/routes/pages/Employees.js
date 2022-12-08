@@ -36,20 +36,18 @@ const Employes = () => {
 	return (
 		<div>
 			<AddEmployee reload={getEmployees} />
-			<div className="p-2">
+			<div className="grid md:grid-cols-2">
 				{listEmployees !== false ? (
 					listEmployees.map((data) => (
-						<div className="m-6" key={data.rut}>
-							<ItemEmployee
-								key={data.rut}
-								name={data.name}
-								rut={data.rut}
-								rank={data.rank}
-							/>
-						</div>
+						<ItemEmployee
+							key={data.rut}
+							name={data.name}
+							rut={data.rut}
+							rank={data.rank}
+						/>
 					))
 				) : (
-					<div className="flex justify-center p-2">
+					<div className="flex justify-center">
 						<CircularProgress />
 					</div>
 				)}
