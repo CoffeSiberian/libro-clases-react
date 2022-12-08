@@ -12,6 +12,8 @@ import MenuItem from "@mui/material/MenuItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
+import ModalLoading from "../ModalLoading";
+import AlertModal from "../AlertModal";
 
 const AddEmployee = ({ reload }) => {
 	const baseData = {
@@ -76,7 +78,7 @@ const AddEmployee = ({ reload }) => {
 
 	const resetAllData = () => {
 		setData(baseData);
-		setError(baseErrData);
+		setDataErr(baseErrData);
 	};
 
 	return (
@@ -100,6 +102,13 @@ const AddEmployee = ({ reload }) => {
 			>
 				<DialogTitle>Agregar Empleado</DialogTitle>
 				<DialogContent>
+					<ModalLoading open={loading} />
+					<AlertModal
+						title="No pudimos agregar al Empleado"
+						description="Intenta mas tarde"
+						handleClose={() => setError(false)}
+						open={error}
+					/>
 					<DialogContentText id="add-employe-info">
 						Ingresa los datos del empleado
 					</DialogContentText>
