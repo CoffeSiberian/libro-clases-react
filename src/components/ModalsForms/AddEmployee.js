@@ -84,25 +84,22 @@ const AddEmployee = ({ reload }) => {
 
 	return (
 		<div>
-				<Typography
-					className="md:hidden flex justify-center"
-					variant="h5"
-				>
-					Empleados
-				</Typography>
+			<Typography className="md:hidden flex justify-center" variant="h5">
+				Empleados
+			</Typography>
 			<div className="flex justify-between p-2">
-				<IconButton
-					aria-label="delete"
-					onClick={() => navigate("/dashboard", { replace: true })}
-				>
-					<ArrowBackIcon />
-				</IconButton>
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"
 				>
 					Empleados
 				</Typography>
+				<IconButton
+					aria-label="delete"
+					onClick={() => navigate("/dashboard", { replace: true })}
+				>
+					<ArrowBackIcon />
+				</IconButton>
 				<Button variant="contained" onClick={() => setOpen(true)}>
 					Agregar Empleado
 				</Button>
