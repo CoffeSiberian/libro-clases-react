@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
@@ -83,13 +84,25 @@ const AddEmployee = ({ reload }) => {
 
 	return (
 		<div>
-			<div className="flex justify-between p-3">
+				<Typography
+					className="md:hidden flex justify-center"
+					variant="h5"
+				>
+					Empleados
+				</Typography>
+			<div className="flex justify-between p-2">
 				<IconButton
 					aria-label="delete"
 					onClick={() => navigate("/dashboard", { replace: true })}
 				>
 					<ArrowBackIcon />
 				</IconButton>
+				<Typography
+					className="hidden md:flex absolute w-full justify-center"
+					variant="h5"
+				>
+					Empleados
+				</Typography>
 				<Button variant="contained" onClick={() => setOpen(true)}>
 					Agregar Empleado
 				</Button>
