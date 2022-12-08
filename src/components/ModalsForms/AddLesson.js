@@ -16,28 +16,26 @@ import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
 
-const AddEmployee = ({ reload }) => {
+const AddLesson = ({ reload }) => {
 	const baseData = {
-		rut: "",
 		name: "",
-		pass: "",
-		rank: "",
+		fk_teacher: "",
+		fk_grade: "",
 	};
 	const baseErrData = {
-		rut: false,
 		name: false,
-		pass: false,
-		rank: false,
+		fk_teacher: false,
+		fk_grade: false,
 	};
 
 	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
-
+	
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}/addemployee`,
+		`${process.env.REACT_APP_APIURL}/addlessons`,
 		"POST",
 		{
 			"Content-Type": "application/json",
@@ -86,14 +84,14 @@ const AddEmployee = ({ reload }) => {
 	return (
 		<div>
 			<Typography className="md:hidden flex justify-center" variant="h5">
-				Empleados
+				Materias
 			</Typography>
 			<div className="flex items-center justify-between mt-3 mr-3">
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"
 				>
-					Empleados
+					Materias
 				</Typography>
 				<IconButton
 					aria-label="delete"
@@ -102,7 +100,7 @@ const AddEmployee = ({ reload }) => {
 					<ArrowBackIcon />
 				</IconButton>
 				<Button variant="contained" onClick={() => setOpen(true)}>
-					Agregar Empleado
+					Agregar Materia
 				</Button>
 			</div>
 			<Dialog
@@ -110,31 +108,21 @@ const AddEmployee = ({ reload }) => {
 				keepMounted
 				fullWidth
 				onClose={() => setOpen(false)}
-				aria-describedby="add-employee"
+				aria-describedby="add-lesson"
 			>
-				<DialogTitle>Agregar Empleado</DialogTitle>
+				<DialogTitle>Agregar Materia</DialogTitle>
 				<DialogContent>
 					<ModalLoading open={loading} />
 					<AlertModal
-						title="No pudimos agregar al Empleado"
+						title="No pudimos agregar la materia"
 						description="Intenta mas tarde"
 						handleClose={() => setError(false)}
 						open={error}
 					/>
-					<DialogContentText id="add-employe-info">
-						Ingresa los datos del empleado
+					<DialogContentText id="add-lesson-info">
+						Ingresa los datos de la materia
 					</DialogContentText>
 					<div className="mt-3 space-y-3">
-						<TextField
-							required
-							id="rut"
-							fullWidth
-							variant="outlined"
-							label="RUT"
-							value={data.rut}
-							onChange={handleChangeText}
-							error={dataErr.rut}
-						/>
 						<TextField
 							required
 							id="name"
@@ -147,24 +135,35 @@ const AddEmployee = ({ reload }) => {
 						/>
 						<TextField
 							required
-							id="pass"
-							fullWidth
+							select
+							id="fk_grade"
+							label="Curso"
 							variant="outlined"
-							label="Contraseña"
-							value={data.pass}
-							onChange={handleChangeText}
-							error={dataErr.pass}
-						/>
+							fullWidth
+							value={data.fk_grade}
+							onChange={(e) => handleChangeSelect(e.target.value, "fk_grade")}
+							error={dataErr.fk_grade}
+						>
+							<MenuItem key={10} value={10}>
+								Director
+							</MenuItem>
+							<MenuItem key={2} value={2}>
+								Inspector
+							</MenuItem>
+							<MenuItem key={1} value={1}>
+								Profesor
+							</MenuItem>
+						</TextField>
 						<TextField
 							required
 							select
-							id="rank"
-							label="Rango"
+							id="fk_teacher"
+							label="Profesor"
 							variant="outlined"
 							fullWidth
-							value={data.rank}
-							onChange={(e) => handleChangeSelect(e.target.value, "rank")}
-							error={dataErr.rank}
+							value={data.fk_teacher}
+							onChange={(e) => handleChangeSelect(e.target.value, "fk_teacher")}
+							error={dataErr.fk_teacher}
 						>
 							<MenuItem key={10} value={10}>
 								Director
@@ -187,4 +186,4 @@ const AddEmployee = ({ reload }) => {
 	);
 };
 
-export default AddEmployee;
+export default AddLesson;

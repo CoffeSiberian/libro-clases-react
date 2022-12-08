@@ -8,7 +8,9 @@ import AlertModal from "./AlertModal";
 const SubmitButton = ({ checkTextError, data }) => {
 	const navigate = useNavigate();
 	const [openEmpyData, setOpenEmpyData] = useState(false);
-	const { loading, error, bodySet, setError } = useFetch(
+
+	// eslint-disable-next-line
+	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
 		`${process.env.REACT_APP_APIURL}/login`,
 		"POST",
 		{ "Content-Type": "application/json" }

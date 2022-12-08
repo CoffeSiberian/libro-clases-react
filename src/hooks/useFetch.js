@@ -23,7 +23,7 @@ const useFetch = (url, method, heder) => {
 	const bodySet = async (obj) => {
 		return await data(JSON.stringify(obj));
 	};
-	return { loading, error, succes, bodySet, setError, setSucces };
+	return [ loading, error, succes, bodySet, setError, setSucces ];
 };
 
 export default useFetch;

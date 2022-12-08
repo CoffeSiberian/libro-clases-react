@@ -9,7 +9,8 @@ const Employes = () => {
 	const loaded = useRef(false);
 	const [listEmployees, setListEmployees] = useState(false);
 
-	const { bodySet } = useFetch(
+	// eslint-disable-next-line
+	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
 		`${process.env.REACT_APP_APIURL}/getallemployee`,
 		"GET",
 		{

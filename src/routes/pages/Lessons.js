@@ -3,12 +3,14 @@ import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import ItemLessons from "../../components/items/ItemLessons";
 import CircularProgress from "@mui/material/CircularProgress";
+import AddLesson from "../../components/ModalsForms/AddLesson";
 
 const Lessons = () => {
 	const loaded = useRef(false);
 	const [listLessons, setListLessons] = useState(false);
-
-	const { bodySet } = useFetch(
+	
+	// eslint-disable-next-line
+	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
 		`${process.env.REACT_APP_APIURL}/getalllessons`,
 		"GET",
 		{
@@ -34,6 +36,7 @@ const Lessons = () => {
 
 	return (
 		<div>
+			<AddLesson reload={getAllLessons} />
 			<div className="grid md:grid-cols-2 p-3">
 				{listLessons !== false ? (
 					listLessons.map((data) => (

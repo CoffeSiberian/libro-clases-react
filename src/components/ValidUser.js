@@ -5,7 +5,8 @@ import { getLocalToken } from "../helpers/validateToken";
 import ModalLoading from "./ModalLoading";
 
 const ValidUser = ({ children }) => {
-	const { bodySet, loading } = useFetch(
+	// eslint-disable-next-line
+	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
 		`${process.env.REACT_APP_APIURL}/validate`,
 		"POST",
 		{
