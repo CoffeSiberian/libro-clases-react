@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
-import ItemEmployee from "../../components/ItemEmployee";
+import ItemEmployee from "../../components/items/ItemEmployee";
 import AddEmployee from "../../components/ModalsForms/AddEmployee";
 import CircularProgress from "@mui/material/CircularProgress";
 

@@ -5,6 +5,7 @@ import Heder from "../components/Heder";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Employes from "./pages/Employees";
+import Lessons from "./pages/Lessons";
 
 const RoutePage = () => {
 	return (
@@ -19,16 +20,25 @@ const RoutePage = () => {
 							<Dashboard />
 						</ValidUser>
 					}
-				/>				
+				/>
 				<Route
-				path="/employes"
-				element={
-					<ValidUser>
-						<Heder />
-						<Employes />
-					</ValidUser>
-				}
-			/>
+					path="/employes"
+					element={
+						<ValidUser>
+							<Heder />
+							<Employes />
+						</ValidUser>
+					}
+				/>
+				<Route
+					path="/lessons"
+					element={
+						<ValidUser>
+							<Heder />
+							<Lessons />
+						</ValidUser>
+					}
+				/>
 				<Route path="*" element={<Error404 />} />
 			</Routes>
 		</Router>
