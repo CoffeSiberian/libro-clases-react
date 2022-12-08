@@ -9,12 +9,13 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
+import LessonGradeSelect from "./LessonGradeSelect";
+import LessonEmployeeSelect from "./LessonEmployeeSelect";
 
 const AddLesson = ({ reload }) => {
 	const baseData = {
@@ -32,9 +33,9 @@ const AddLesson = ({ reload }) => {
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
-	
+
 	// eslint-disable-next-line
-	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
+	const [loading, error, succes, bodySet, setError] = useFetch(
 		`${process.env.REACT_APP_APIURL}/addlessons`,
 		"POST",
 		{
@@ -133,48 +134,17 @@ const AddLesson = ({ reload }) => {
 							onChange={handleChangeText}
 							error={dataErr.name}
 						/>
-						<TextField
-							required
-							select
-							id="fk_grade"
-							label="Curso"
-							variant="outlined"
-							fullWidth
-							value={data.fk_grade}
-							onChange={(e) => handleChangeSelect(e.target.value, "fk_grade")}
+						<LessonGradeSelect
+							data={data.fk_grade}
+							change={handleChangeSelect}
 							error={dataErr.fk_grade}
-						>
-							<MenuItem key={10} value={10}>
-								Director
-							</MenuItem>
-							<MenuItem key={2} value={2}>
-								Inspector
-							</MenuItem>
-							<MenuItem key={1} value={1}>
-								Profesor
-							</MenuItem>
-						</TextField>
-						<TextField
-							required
-							select
-							id="fk_teacher"
-							label="Profesor"
-							variant="outlined"
-							fullWidth
-							value={data.fk_teacher}
-							onChange={(e) => handleChangeSelect(e.target.value, "fk_teacher")}
+						/>
+						<LessonEmployeeSelect
+							data={data.fk_teacher}
+							change={handleChangeSelect}
 							error={dataErr.fk_teacher}
-						>
-							<MenuItem key={10} value={10}>
-								Director
-							</MenuItem>
-							<MenuItem key={2} value={2}>
-								Inspector
-							</MenuItem>
-							<MenuItem key={1} value={1}>
-								Profesor
-							</MenuItem>
-						</TextField>
+						/>
+
 					</div>
 				</DialogContent>
 				<DialogActions>
