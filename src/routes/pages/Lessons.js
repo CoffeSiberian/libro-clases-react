@@ -4,11 +4,12 @@ import { getLocalToken } from "../../helpers/validateToken";
 import ItemLessons from "../../components/items/ItemLessons";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddLesson from "../../components/ModalsForms/AddLesson";
+import EmpyData from "../../components/EmpyData";
 
 const Lessons = () => {
 	const loaded = useRef(false);
 	const [listLessons, setListLessons] = useState(false);
-	
+
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
 		`${process.env.REACT_APP_APIURL}/getalllessons`,
@@ -37,6 +38,13 @@ const Lessons = () => {
 	return (
 		<div>
 			<AddLesson reload={getAllLessons} />
+			{!listLessons && !error ? (
+				<div className="flex justify-center mt-6">
+					<CircularProgress />
+				</div>
+			) : (
+				<></>
+			)}
 			<div className="grid md:grid-cols-2 p-3">
 				{listLessons !== false ? (
 					listLessons.map((data) => (
@@ -50,10 +58,11 @@ const Lessons = () => {
 						/>
 					))
 				) : (
-					<div className="flex justify-center p-2">
-						<CircularProgress />
-					</div>
+					<></>
 				)}
+			</div>
+			<div className="flex w-full justify-center mt-6">
+				{error ? <EmpyData msj={"No encontramos resultados"} /> : <></>}
 			</div>
 		</div>
 	);

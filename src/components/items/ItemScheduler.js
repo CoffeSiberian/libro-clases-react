@@ -1,18 +1,24 @@
-import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import Button from "@mui/material/Button";
 
-const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
+const ItemSchedule = ({ name, grade, dateStart, dateEnd, objetive }) => {
 	return (
 		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
 			<div className="grid grid-cols-2 items-center">
 				<Typography className="text-right" variant="subtitle1">
-					ID:
+					Name:
 				</Typography>
 				<div className="ml-2">
-					<Typography variant="body2">{id}</Typography>
+					<Typography variant="body2">{name}</Typography>
+				</div>
+			</div>
+
+			<div className="grid grid-cols-2 items-center">
+				<Typography className="text-right" variant="subtitle1">
+					Curso:
+				</Typography>
+				<div className="ml-2">
+					<Typography variant="body2">{grade}</Typography>
 				</div>
 			</div>
 
@@ -24,10 +30,10 @@ const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
 			/>
 			<div className="grid grid-cols-2 items-center">
 				<Typography className="text-right" variant="subtitle1">
-					Nombre:
+					Inicio Clase:
 				</Typography>
 				<div className="ml-2">
-					<Typography variant="body2">{name}</Typography>
+					<Typography variant="body2">{dateStart}</Typography>
 				</div>
 			</div>
 
@@ -39,10 +45,10 @@ const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
 			/>
 			<div className="grid grid-cols-2 items-center">
 				<Typography className="text-right" variant="subtitle1">
-					Curso:
+					Fin Clase:
 				</Typography>
 				<div className="ml-2">
-					<Typography variant="body2">{GradeName}</Typography>
+					<Typography variant="body2">{dateEnd}</Typography>
 				</div>
 			</div>
 
@@ -54,31 +60,19 @@ const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
 			/>
 
 			<Typography className="text-center" variant="subtitle1">
-				Profesor
+				Objetivo de clase
 			</Typography>
-			<Typography className="text-center" variant="body2">
-				{EmployeeRut}
-			</Typography>
-			<Typography className="text-center" variant="body2">
-				{EmployeeName}
-			</Typography>
-
-			<Divider
-				className="flex"
-				orientation="horizontal"
-				variant="middle"
-				flexItem
-			/>
-
-			<div className="flex justify-center mt-1">
-				<Link to={"/scheduler/"+id}>
-					<Button variant="outlined" endIcon={<CalendarMonthIcon />}>
-						Ver Horarios
-					</Button>
-				</Link>
-			</div>
+			{objetive !== null ? (
+				<Typography className="text-center" variant="body2">
+					{objetive}
+				</Typography>
+			) : (
+				<Typography className="text-center" variant="body2">
+					No definido
+				</Typography>
+			)}
 		</div>
 	);
 };
 
-export default ItemLessons;
+export default ItemSchedule;

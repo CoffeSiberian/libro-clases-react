@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
-import ItemEmployee from "../../components/items/ItemEmployee";
-import AddEmployee from "../../components/ModalsForms/AddEmployee";
 import CircularProgress from "@mui/material/CircularProgress";
+import ItemSchedule from "../../components/items/ItemScheduler";
 import EmpyData from "../../components/EmpyData";
 
-const Employes = () => {
+const Scheduler = () => {
+	const { id } = useParams();
+
 	const loaded = useRef(false);
-	const [listEmployees, setListEmployees] = useState(false);
+	const [listScheduler, setListScheduler] = useState(false);
 
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}/getallemployee`,
+		`${process.env.REACT_APP_APIURL}/getLessonSchedule/${id}`,
 		"GET",
 		{
 			"Content-Type": "application/json",
@@ -20,25 +22,24 @@ const Employes = () => {
 		}
 	);
 
-	const getEmployees = async () => {
+	const getScheduler = async () => {
 		let fetchResponse = await bodySet();
 		if (fetchResponse.status === 200) {
-			return setListEmployees(await fetchResponse.json());
+			return setListScheduler(await fetchResponse.json());
 		}
-		return setListEmployees(false);
+		return setListScheduler(false);
 	};
 
 	useEffect(() => {
 		if (!loaded.current) {
-			getEmployees();
+			getScheduler();
 			loaded.current = true;
 		} // eslint-disable-next-line
 	}, []);
 
 	return (
 		<div>
-			<AddEmployee reload={getEmployees} />
-			{!listEmployees && !error ? (
+			{!listScheduler && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
 				</div>
@@ -46,13 +47,15 @@ const Employes = () => {
 				<></>
 			)}
 			<div className="grid md:grid-cols-2">
-				{listEmployees !== false ? (
-					listEmployees.map((data) => (
-						<ItemEmployee
-							key={data.rut}
-							name={data.name}
-							rut={data.rut}
-							rank={data.rank}
+				{listScheduler !== false && !error ? (
+					listScheduler.map((data) => (
+						<ItemSchedule
+							key={data.id}
+							name={data.Lesson.name}
+							grade={data.Lesson.Grade.name}
+							dateStart={data.startAt}
+							dateEnd={data.endAt}
+							objetive={data.objective}
 						/>
 					))
 				) : (
@@ -66,4 +69,4 @@ const Employes = () => {
 	);
 };
 
-export default Employes;
+export default Scheduler;

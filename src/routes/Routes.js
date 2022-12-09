@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Employes from "./pages/Employees";
 import Lessons from "./pages/Lessons";
+import Scheduler from "./pages/Scheduler";
 
 const RoutePage = () => {
 	return (
@@ -36,6 +37,15 @@ const RoutePage = () => {
 						<ValidUser>
 							<Heder />
 							<Lessons />
+						</ValidUser>
+					}
+				/>
+								<Route
+					path="/scheduler/:id"
+					element={
+						<ValidUser>
+							<Heder />
+							<Scheduler />
 						</ValidUser>
 					}
 				/>
