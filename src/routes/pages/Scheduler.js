@@ -5,6 +5,7 @@ import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
 import ItemSchedule from "../../components/items/ItemScheduler";
 import EmpyData from "../../components/EmpyData";
+import AddScheduler from "../../components/ModalsForms/AddScheduler";
 
 const Scheduler = () => {
 	const { id } = useParams();
@@ -39,6 +40,7 @@ const Scheduler = () => {
 
 	return (
 		<div>
+			<AddScheduler reload={getScheduler} id={id} />
 			{!listScheduler && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
