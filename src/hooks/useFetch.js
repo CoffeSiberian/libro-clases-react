@@ -8,22 +8,20 @@ const useFetch = (url, method, heder) => {
 
 	const data = async (bodyObj) => {
 		setLoading(true);
-		let dataResponse = await fetchData(
-			bodyObj,
-			method,
-			heder,
-			url
-		);
+		let dataResponse = await fetchData(bodyObj, method, heder, url);
 		if (!(await dataResponse.ok)) {
 			setError(true);
-		} else setSucces(true);
+		} else {
+			setSucces(true);
+			setError(false);
+		}
 		setLoading(false);
 		return dataResponse;
 	};
 	const bodySet = async (obj) => {
 		return await data(JSON.stringify(obj));
 	};
-	return [ loading, error, succes, bodySet, setError, setSucces ];
+	return [loading, error, succes, bodySet, setError, setSucces];
 };
 
 export default useFetch;
