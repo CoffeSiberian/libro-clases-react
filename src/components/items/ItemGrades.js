@@ -1,5 +1,9 @@
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
+import GroupIcon from '@mui/icons-material/Group';
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+
 
 const ItemGrades = ({ id, name, count }) => {
 	return (
@@ -43,6 +47,21 @@ const ItemGrades = ({ id, name, count }) => {
 				<div className="ml-2">
 					<Typography variant="body2">{count}</Typography>
 				</div>
+			</div>
+			
+			<Divider
+				className="flexn"
+				orientation="horizontal"
+				variant="middle"
+				flexItem
+			/>
+			
+			<div className="flex justify-center mt-1">
+				<Link to={"/students/"+id}>
+					<Button variant="outlined" endIcon={<GroupIcon />}>
+						Ver Alumnos
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);

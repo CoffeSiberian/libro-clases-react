@@ -8,6 +8,7 @@ import Employes from "./pages/Employees";
 import Lessons from "./pages/Lessons";
 import Scheduler from "./pages/Scheduler";
 import Grades from "./pages/Grades";
+import Student from "./pages/Students";
 
 const RoutePage = () => {
 	return (
@@ -56,6 +57,15 @@ const RoutePage = () => {
 						<ValidUser>
 							<Heder />
 							<Grades />
+						</ValidUser>
+					}
+				/>
+				<Route
+					path="/students/:id"
+					element={
+						<ValidUser>
+							<Heder />
+							<Student />
 						</ValidUser>
 					}
 				/>
