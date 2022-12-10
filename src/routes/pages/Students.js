@@ -11,6 +11,7 @@ const Student = () => {
 	const { id } = useParams();
 
 	const loaded = useRef(false);
+	const gradeName = useRef();
 	const [listStudent, setListStudent] = useState(false);
 
 	// eslint-disable-next-line
@@ -26,7 +27,9 @@ const Student = () => {
 	const getStudent = async () => {
 		let fetchResponse = await bodySet();
 		if (fetchResponse.status === 200) {
-			return setListStudent(await fetchResponse.json());
+			let data = await fetchResponse.json();
+			gradeName.current = await data.name;
+			return setListStudent(await data);
 		}
 		return setListStudent(false);
 	};
@@ -40,7 +43,11 @@ const Student = () => {
 
 	return (
 		<div>
-			<AddStudent reload={getStudent} gradeId={id} />
+			<AddStudent
+				reload={getStudent}
+				gradeId={id}
+				gradeName={gradeName.current}
+			/>
 			{!listStudent && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
@@ -51,11 +58,7 @@ const Student = () => {
 			<div className="grid md:grid-cols-2">
 				{listStudent !== false && !error ? (
 					listStudent.Students.map((data) => (
-						<ItemStudent
-							key={data.rut}
-							rut={data.rut}
-							name={data.name}
-						/>
+						<ItemStudent key={data.rut} rut={data.rut} name={data.name} />
 					))
 				) : (
 					<></>
@@ -63,6 +66,11 @@ const Student = () => {
 			</div>
 			<div className="flex w-full justify-center mt-6">
 				{error ? <EmpyData msj={"No encontramos resultados"} /> : <></>}
+				{listStudent !== false && listStudent.Students.length === 0 ? (
+					<EmpyData msj={"No encontramos estudiantes"} />
+				) : (
+					<></>
+				)}
 			</div>
 		</div>
 	);

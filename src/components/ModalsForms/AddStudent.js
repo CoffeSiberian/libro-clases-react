@@ -15,7 +15,7 @@ import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
 
-const AddStudent = ({ reload, gradeId }) => {
+const AddStudent = ({ reload, gradeId, gradeName }) => {
 	const baseData = {
 		rut: "",
 		name: "",
@@ -78,14 +78,14 @@ const AddStudent = ({ reload, gradeId }) => {
 	return (
 		<div>
 			<Typography className="md:hidden flex justify-center" variant="h5">
-				Estudiantes
+				Estudiantes {gradeName}
 			</Typography>
 			<div className="flex items-center justify-between mt-3 mr-3">
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"
 				>
-					Estudiantes
+					Estudiantes {gradeName}
 				</Typography>
 				<IconButton
 					aria-label="Return"
