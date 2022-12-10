@@ -14,30 +14,24 @@ const Director = [
 		btnColor: "info",
 	},
 	{
-		name: "Materias",
-		href: "/lessons",
-		img: addLess,
-		btnColor: "info",
-	},
-	{
 		name: "Cursos",
 		href: "/grades",
 		img: viewGrad,
 		btnColor: "info",
 	},
 	{
-		name: "Alumnos",
-		href: "/students",
-		img: addStud,
+		name: "Materias",
+		href: "/lessons",
+		img: addLess,
 		btnColor: "info",
 	},
 ];
 
 const Teacher = [
 	{
-		name: "Empleados",
-		href: "/employes",
-		img: addEmplo,
+		name: "Alumnos",
+		href: "/students",
+		img: addStud,
 		btnColor: "info",
 	},
 	{
@@ -64,7 +58,7 @@ const Inspector = [
 ];
 
 const testImg =
-	"https://cdn.discordapp.com/avatars/405916575216959498/53a88dfe3e95a475d235c63953e5e28f.png?size=1024";
+	"https://cdn.discordapp.com/avatars/589538129543823436/b5b88875d8e26ba573c8b6f707bab2ca.png?size=1024";
 
 const Dashboard = () => {
 	const jwt_obj = jwt_decode(localStorage.getItem("token"));
@@ -84,7 +78,7 @@ const Dashboard = () => {
 				return "";
 		}
 	};
-	
+
 	return (
 		<div>
 			<div className="flex justify-center items-center flex-col p-3 md:flex-row">
