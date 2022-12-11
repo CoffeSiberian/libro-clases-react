@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 
@@ -27,6 +30,21 @@ const ItemStudent = ({ rut, name }) => {
 				<div className="ml-2">
 					<Typography variant="body2">{name}</Typography>
 				</div>
+			</div>
+
+			<Divider
+				className="flexn"
+				orientation="horizontal"
+				variant="middle"
+				flexItem
+			/>
+
+			<div className="flex justify-center mt-1">
+				<Link to={"/observation/" + rut}>
+					<Button variant="outlined" endIcon={<NoteAltIcon />}>
+						observaciones
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);

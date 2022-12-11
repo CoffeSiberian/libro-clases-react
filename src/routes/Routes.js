@@ -9,6 +9,7 @@ import Lessons from "./pages/Lessons";
 import Scheduler from "./pages/Scheduler";
 import Grades from "./pages/Grades";
 import Student from "./pages/Students";
+import Observation from "./pages/Observation";
 
 const RoutePage = () => {
 	return (
@@ -66,6 +67,15 @@ const RoutePage = () => {
 						<ValidUser>
 							<Heder />
 							<Student />
+						</ValidUser>
+					}
+				/>
+				<Route
+					path="/observation/:rut"
+					element={
+						<ValidUser>
+							<Heder />
+							<Observation />
 						</ValidUser>
 					}
 				/>
