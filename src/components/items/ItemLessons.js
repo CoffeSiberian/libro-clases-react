@@ -2,9 +2,17 @@ import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import GradeIcon from '@mui/icons-material/Grade';
 import Button from "@mui/material/Button";
 
-const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
+const ItemLessons = ({
+	id,
+	name,
+	EmployeeRut,
+	EmployeeName,
+	GradeName,
+	GradeId,
+}) => {
 	return (
 		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
 			<div className="grid grid-cols-2 items-center">
@@ -70,10 +78,15 @@ const ItemLessons = ({ id, name, EmployeeRut, EmployeeName, GradeName }) => {
 				flexItem
 			/>
 
-			<div className="flex justify-center mt-1">
-				<Link to={"/scheduler/"+id}>
+			<div className="flex justify-center space-x-4 mt-1">
+				<Link to={"/scheduler/" + id}>
 					<Button variant="outlined" endIcon={<CalendarMonthIcon />}>
-						Ver Horarios
+						Horarios
+					</Button>
+				</Link>
+				<Link to={"/studentsQualifi/" + GradeId}>
+					<Button variant="outlined" endIcon={<GradeIcon />}>
+						Calificaiones
 					</Button>
 				</Link>
 			</div>
