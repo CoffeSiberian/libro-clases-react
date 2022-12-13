@@ -4,18 +4,23 @@ import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
 import EmpyData from "../../components/EmpyData";
+import { Typography } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useNavigate } from "react-router-dom";
 import ItemStudentQualifi from "../../components/items/ItemStudentQualifi";
 
-const Qualification = () => {
-	const { rut, idLesson } = useParams();
+const QualificationStudent = () => {
+	const { idLesson, gradeId } = useParams();
+	const navigate = useNavigate();
 
 	const loaded = useRef(false);
 	const gradeName = useRef();
-	const [listQualification, setListQualification] = useState(false);
+	const [listStudent, setListStudent] = useState(false);
 
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}/getstudent/${rut}/${idLesson}`,
+		`${process.env.REACT_APP_APIURL}/getstudent/${gradeId}`,
 		"GET",
 		{
 			"Content-Type": "application/json",
@@ -23,26 +28,43 @@ const Qualification = () => {
 		}
 	);
 
-	const getQualification = async () => {
+	const getStudent = async () => {
 		let fetchResponse = await bodySet();
 		if (fetchResponse.status === 200) {
 			let data = await fetchResponse.json();
 			gradeName.current = await data.name;
-			return setListQualification(await data);
+			return setListStudent(await data);
 		}
-		return setListQualification(false);
+		return setListStudent(false);
 	};
 
 	useEffect(() => {
 		if (!loaded.current) {
-			getQualification();
+			getStudent();
 			loaded.current = true;
 		} // eslint-disable-next-line
 	}, []);
 
 	return (
 		<div>
-			{!listQualification && !error ? (
+			<Typography className="md:hidden flex justify-center" variant="h5">
+				Empleados
+			</Typography>
+			<div className="flex items-center justify-between mt-3 mr-3">
+				<Typography
+					className="hidden md:flex absolute w-full justify-center"
+					variant="h5"
+				>
+					Empleados
+				</Typography>
+				<IconButton
+					aria-label="delete"
+					onClick={() => navigate("/lessons", { replace: true })}
+				>
+					<ArrowBackIcon />
+				</IconButton>
+			</div>
+			{!listStudent && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
 				</div>
@@ -50,8 +72,8 @@ const Qualification = () => {
 				<></>
 			)}
 			<div className="grid md:grid-cols-2">
-				{listQualification !== false && !error ? (
-					listQualification.Students.map((data) => (
+				{listStudent !== false && !error ? (
+					listStudent.Students.map((data) => (
 						<ItemStudentQualifi
 							key={data.rut}
 							rut={data.rut}
@@ -65,8 +87,7 @@ const Qualification = () => {
 			</div>
 			<div className="flex w-full justify-center mt-6">
 				{error ? <EmpyData msj={"No encontramos resultados"} /> : <></>}
-				{listQualification !== false &&
-				listQualification.Students.length === 0 ? (
+				{listStudent !== false && listStudent.Students.length === 0 ? (
 					<EmpyData msj={"No encontramos estudiantes"} />
 				) : (
 					<></>
@@ -76,4 +97,4 @@ const Qualification = () => {
 	);
 };
 
-export default Qualification;
+export default QualificationStudent;

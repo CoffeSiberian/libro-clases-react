@@ -4,7 +4,7 @@ import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 
-const ItemStudentQualifi = ({ rut, name }) => {
+const ItemStudentQualifi = ({ rut, name, lessonId }) => {
 	return (
 		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
 			<div className="grid grid-cols-2 items-center">
@@ -40,7 +40,7 @@ const ItemStudentQualifi = ({ rut, name }) => {
 			/>
 
 			<div className="flex justify-center mt-1">
-				<Link to={"/qualification/" + rut}>
+				<Link to={`/qualification/${rut}/${lessonId}`}>
 					<Button variant="outlined" endIcon={<NoteAltIcon />}>
 						Ver Notas
 					</Button>

@@ -79,12 +79,12 @@ const ItemLessons = ({
 			/>
 
 			<div className="flex justify-center space-x-4 mt-1">
-				<Link to={"/scheduler/" + id}>
+				<Link to={`/scheduler/${id}`}>
 					<Button variant="outlined" endIcon={<CalendarMonthIcon />}>
 						Horarios
 					</Button>
 				</Link>
-				<Link to={"/studentsQualifi/" + GradeId}>
+				<Link to={`/studentsQualifi/${GradeId}/${id}`}>
 					<Button variant="outlined" endIcon={<GradeIcon />}>
 						Calificaiones
 					</Button>

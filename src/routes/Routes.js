@@ -10,6 +10,7 @@ import Scheduler from "./pages/Scheduler";
 import Grades from "./pages/Grades";
 import Student from "./pages/Students";
 import Observation from "./pages/Observation";
+import QualificationStudent from "./pages/QualificationStudent";
 import Qualification from "./pages/Qualification";
 
 const RoutePage = () => {
@@ -80,8 +81,17 @@ const RoutePage = () => {
 						</ValidUser>
 					}
 				/>
-								<Route
-					path="/studentsQualifi/:id"
+				<Route
+					path="/studentsQualifi/:idLesson/:gradeId"
+					element={
+						<ValidUser>
+							<Heder />
+							<QualificationStudent />
+						</ValidUser>
+					}
+				/>
+				<Route
+					path="/qualification/:idLesson/:rut"
 					element={
 						<ValidUser>
 							<Heder />
