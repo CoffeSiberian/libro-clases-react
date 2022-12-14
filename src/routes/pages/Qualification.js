@@ -4,18 +4,19 @@ import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
 import EmpyData from "../../components/EmpyData";
-import ItemStudentQualifi from "../../components/items/ItemStudentQualifi";
+import ItemQualification from "../../components/items/ItemQualification";
+import AddQualification from "../../components/ModalsForms/AddQualification";
 
 const Qualification = () => {
 	const { rut, idLesson } = useParams();
 
 	const loaded = useRef(false);
-	const gradeName = useRef();
+	const lessonName = useRef();
+	const gradeId = useRef();
 	const [listQualification, setListQualification] = useState(false);
-
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}/getstudent/${rut}/${idLesson}`,
+		`${process.env.REACT_APP_APIURL}/getqualification/${rut}/${idLesson}`,
 		"GET",
 		{
 			"Content-Type": "application/json",
@@ -27,7 +28,8 @@ const Qualification = () => {
 		let fetchResponse = await bodySet();
 		if (fetchResponse.status === 200) {
 			let data = await fetchResponse.json();
-			gradeName.current = await data.name;
+			lessonName.current = data.name;
+			gradeId.current = data.Grade.id;
 			return setListQualification(await data);
 		}
 		return setListQualification(false);
@@ -42,6 +44,13 @@ const Qualification = () => {
 
 	return (
 		<div>
+			<AddQualification
+				reload={getQualification}
+				rut={rut}
+				lessonName={lessonName.current}
+				lessonId={idLesson}
+				gradeId={gradeId.current}
+			/>
 			{!listQualification && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
@@ -51,13 +60,8 @@ const Qualification = () => {
 			)}
 			<div className="grid md:grid-cols-2">
 				{listQualification !== false && !error ? (
-					listQualification.Students.map((data) => (
-						<ItemStudentQualifi
-							key={data.rut}
-							rut={data.rut}
-							name={data.name}
-							lessonId={idLesson}
-						/>
+					listQualification.Qualifications.map((data) => (
+						<ItemQualification key={data.id} id={data.id} score={data.score} />
 					))
 				) : (
 					<></>
@@ -66,7 +70,7 @@ const Qualification = () => {
 			<div className="flex w-full justify-center mt-6">
 				{error ? <EmpyData msj={"No encontramos resultados"} /> : <></>}
 				{listQualification !== false &&
-				listQualification.Students.length === 0 ? (
+				listQualification.Qualifications.length === 0 ? (
 					<EmpyData msj={"No encontramos estudiantes"} />
 				) : (
 					<></>

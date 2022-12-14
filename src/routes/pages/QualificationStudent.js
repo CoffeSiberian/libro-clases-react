@@ -13,7 +13,6 @@ import ItemStudentQualifi from "../../components/items/ItemStudentQualifi";
 const QualificationStudent = () => {
 	const { idLesson, gradeId } = useParams();
 	const navigate = useNavigate();
-
 	const loaded = useRef(false);
 	const gradeName = useRef();
 	const [listStudent, setListStudent] = useState(false);
@@ -48,14 +47,14 @@ const QualificationStudent = () => {
 	return (
 		<div>
 			<Typography className="md:hidden flex justify-center" variant="h5">
-				Empleados
+				Estudiantes {gradeName.current}
 			</Typography>
 			<div className="flex items-center justify-between mt-3 mr-3">
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"
 				>
-					Empleados
+					Estudiantes {gradeName.current}
 				</Typography>
 				<IconButton
 					aria-label="delete"

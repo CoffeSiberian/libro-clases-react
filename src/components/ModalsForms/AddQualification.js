@@ -15,12 +15,16 @@ import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
 
-const AddQualification = ({ reload }) => {
+const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 	const baseData = {
-		name: "",
+		score: "",
+		fk_lesson: lessonId,
+		fk_student: rut,
 	};
 	const baseErrData = {
-		name: false,
+		score: false,
+		fk_lesson: false,
+		fk_student: false,
 	};
 
 	const navigate = useNavigate();
@@ -30,7 +34,7 @@ const AddQualification = ({ reload }) => {
 
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}/addgrade`,
+		`${process.env.REACT_APP_APIURL}/addqualification`,
 		"POST",
 		{
 			"Content-Type": "application/json",
@@ -75,23 +79,27 @@ const AddQualification = ({ reload }) => {
 	return (
 		<div>
 			<Typography className="md:hidden flex justify-center" variant="h5">
-				Cursos
+				{rut} - {lessonName}
 			</Typography>
 			<div className="flex items-center justify-between mt-3 mr-3">
 				<Typography
 					className="hidden md:flex absolute w-full justify-center"
 					variant="h5"
 				>
-					Cursos
+					{rut} - {lessonName}
 				</Typography>
 				<IconButton
 					aria-label="delete"
-					onClick={() => navigate("/dashboard", { replace: true })}
+					onClick={() =>
+						navigate(`/studentsQualifi/${gradeId}/${lessonId}`, {
+							replace: true,
+						})
+					}
 				>
 					<ArrowBackIcon />
 				</IconButton>
 				<Button variant="contained" onClick={() => setOpen(true)}>
-					Agregar Curso
+					Agregar Nota
 				</Button>
 			</div>
 			<Dialog
@@ -101,7 +109,7 @@ const AddQualification = ({ reload }) => {
 				onClose={() => setOpen(false)}
 				aria-describedby="add-grade"
 			>
-				<DialogTitle>Agregar Curso</DialogTitle>
+				<DialogTitle>Agregar Nota</DialogTitle>
 				<DialogContent>
 					<ModalLoading open={loading} />
 					<AlertModal
@@ -111,18 +119,18 @@ const AddQualification = ({ reload }) => {
 						open={error}
 					/>
 					<DialogContentText id="add-grade-info">
-						Ingresa los datos del curso
+						Ingresa la nota entre 1.0 y 7.0
 					</DialogContentText>
 					<div className="mt-3 space-y-3">
 						<TextField
 							required
-							id="name"
+							id="score"
 							fullWidth
 							variant="outlined"
-							label="Nombre del Curso"
-							value={data.name}
+							label="Nota"
+							value={data.score}
 							onChange={handleChangeText}
-							error={dataErr.name}
+							error={dataErr.score}
 						/>
 					</div>
 				</DialogContent>

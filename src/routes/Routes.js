@@ -82,7 +82,7 @@ const RoutePage = () => {
 					}
 				/>
 				<Route
-					path="/studentsQualifi/:idLesson/:gradeId"
+					path="/studentsQualifi/:gradeId/:idLesson"
 					element={
 						<ValidUser>
 							<Heder />
@@ -91,7 +91,7 @@ const RoutePage = () => {
 					}
 				/>
 				<Route
-					path="/qualification/:idLesson/:rut"
+					path="/qualification/:rut/:idLesson"
 					element={
 						<ValidUser>
 							<Heder />
