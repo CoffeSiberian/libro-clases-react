@@ -1,7 +1,16 @@
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
+import EditObjetive from "../ModalsForms/EditObjetive";
 
-const ItemSchedule = ({ name, grade, dateStart, dateEnd, objetive }) => {
+const ItemSchedule = ({
+	id,
+	name,
+	grade,
+	dateStart,
+	dateEnd,
+	objetive,
+	reload,
+}) => {
 	const options = {
 		dateStyle: "full",
 	};
@@ -90,6 +99,20 @@ const ItemSchedule = ({ name, grade, dateStart, dateEnd, objetive }) => {
 					No definido
 				</Typography>
 			)}
+
+			<Divider
+				className="flex"
+				orientation="horizontal"
+				variant="middle"
+				flexItem
+			/>
+			<div className="flex justify-center mt-2">
+				<EditObjetive
+					schedulerId={id}
+					objetive={objetive !== null ? objetive : ""}
+					reload={reload}
+				/>
+			</div>
 		</div>
 	);
 };

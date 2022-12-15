@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
+import rutFormater from "../../helpers/rutFormat";
 
 const LessonEmployeeSelect = ({ data, change, error }) => {
 	const loaded = useRef(false);
@@ -48,7 +49,7 @@ const LessonEmployeeSelect = ({ data, change, error }) => {
 			{listEmployees !== false ? (
 				listEmployees.map((data) => (
 					<MenuItem key={data.rut} value={data.rut}>
-						{data.rut} - {data.name}
+						{rutFormater(data.rut)} - {data.name}
 					</MenuItem>
 				))
 			) : (

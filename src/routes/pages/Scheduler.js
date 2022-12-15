@@ -53,11 +53,13 @@ const Scheduler = () => {
 					listScheduler.map((data) => (
 						<ItemSchedule
 							key={data.id}
+							id={data.id}
 							name={data.Lesson.name}
 							grade={data.Lesson.Grade.name}
 							dateStart={data.startAt}
 							dateEnd={data.endAt}
 							objetive={data.objective}
+							reload={getScheduler}
 						/>
 					))
 				) : (
