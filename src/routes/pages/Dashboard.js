@@ -5,6 +5,7 @@ import addEmplo from "../../static/img/addEmplo.png";
 import addLess from "../../static/img/addLess.png";
 import addStud from "../../static/img/addStud.png";
 import viewGrad from "../../static/img/viewGrad.png";
+import rutFormater from "../../helpers/rutFormat";
 
 const Director = [
 	{
@@ -64,7 +65,7 @@ const Dashboard = () => {
 	const jwt_obj = jwt_decode(localStorage.getItem("token"));
 	const user_name = jwt_obj.name;
 	const user_rank = jwt_obj.rank;
-	const user_rut = jwt_obj.rut;
+	const user_rut = rutFormater(jwt_obj.rut);
 
 	const rankName = () => {
 		switch (user_rank) {

@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
+import rutFormater from "../../helpers/rutFormat";
 
 const ItemEmployee = ({ name, rut, rank }) => {
 	const rankName = () => {
@@ -26,7 +27,7 @@ const ItemEmployee = ({ name, rut, rank }) => {
 					RUT:
 				</Typography>
 				<div className="ml-2">
-					<Typography variant="body2">{rut}</Typography>
+					<Typography variant="body2">{rutFormater(rut)}</Typography>
 				</div>
 			</div>
 

@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import GradeIcon from '@mui/icons-material/Grade';
+import GradeIcon from "@mui/icons-material/Grade";
 import Button from "@mui/material/Button";
+import rutFormater from "../../helpers/rutFormat";
 
 const ItemLessons = ({
 	id,
@@ -65,7 +66,7 @@ const ItemLessons = ({
 				Profesor
 			</Typography>
 			<Typography className="text-center" variant="body2">
-				{EmployeeRut}
+				{rutFormater(EmployeeRut)}
 			</Typography>
 			<Typography className="text-center" variant="body2">
 				{EmployeeName}

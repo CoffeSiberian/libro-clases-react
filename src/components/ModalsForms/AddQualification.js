@@ -14,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
+import rutFormater from "../../helpers/rutFormat";
 
 const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 	const baseData = {
@@ -90,15 +91,18 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 	return (
 		<div>
 			<Typography className="md:hidden flex justify-center" variant="h5">
-				{rut} - {lessonName}
+				{rutFormater(rut)}
+			</Typography>
+			<Typography className="md:hidden flex justify-center" variant="h5">
+				{lessonName}
 			</Typography>
 			<div className="flex items-center justify-between mt-3 mr-3">
-				<Typography
-					className="hidden md:flex absolute w-full justify-center"
-					variant="h5"
-				>
-					{rut} - {lessonName}
-				</Typography>
+				<div className="hidden md:flex absolute w-full justify-center">
+					<div className="flex flex-col items-center">
+						<Typography variant="h5">{rutFormater(rut)}</Typography>
+						<Typography variant="h5">{lessonName}</Typography>
+					</div>
+				</div>
 				<IconButton
 					aria-label="delete"
 					onClick={() =>
