@@ -44,25 +44,36 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 
 	const handleChangeText = (event) => {
 		let eId = event.target.attributes.id.value;
-		let eValue = event.target.value;
-		setData({ ...data, [eId]: eValue });
+		let value = event.target.value;
+		if (!checkNumErr(eId, value)) {
+			return setData({ ...data, [eId]: parseFloat(value) });
+		}
+		setData({ ...data, [eId]: value });
 	};
 
-	const checkTextError = () => {
-		let err = {};
-		let returnErr = false;
-		for (let r in data) {
-			if (data[r].length === 0) {
-				err[r] = true;
-				returnErr = true;
-			} else err[r] = false;
+	const checkNumErr = (id, value) => {
+		let expression = /[1-7]+\.+[0-9]+/;
+		if (value === "") {
+			setDataErr({ ...dataErr, [id]: true });
+			return true;
 		}
-		setDataErr(err);
-		return returnErr;
+
+		if (!value.match(expression)) {
+			setDataErr({ ...dataErr, [id]: true });
+			return true;
+		}
+
+		if (parseFloat(value) > 7 || parseFloat(value) < 1) {
+			setDataErr({ ...dataErr, [id]: true });
+			return true;
+		}
+
+		setDataErr({ ...dataErr, [id]: false });
+		return false;
 	};
 
 	const dataEmpyToSend = async () => {
-		if (checkTextError()) return;
+		if (dataErr.score) return false;
 		let fetchResponse = await bodySet(data);
 		if (fetchResponse.ok) {
 			resetAllData();
