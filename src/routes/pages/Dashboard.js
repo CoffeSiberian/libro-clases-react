@@ -6,6 +6,7 @@ import addLess from "../../static/img/addLess.png";
 import addStud from "../../static/img/addStud.png";
 import viewGrad from "../../static/img/viewGrad.png";
 import rutFormater from "../../helpers/rutFormat";
+import usrprofile from "../../static/img/usrprofile.png";
 
 const Director = [
 	{
@@ -58,9 +59,6 @@ const Inspector = [
 	},
 ];
 
-const testImg =
-	"https://cdn.discordapp.com/avatars/589538129543823436/b5b88875d8e26ba573c8b6f707bab2ca.png?size=1024";
-
 const Dashboard = () => {
 	const jwt_obj = jwt_decode(localStorage.getItem("token"));
 	const user_name = jwt_obj.name;
@@ -85,7 +83,7 @@ const Dashboard = () => {
 			<div className="flex justify-center items-center flex-col p-3 md:flex-row">
 				<img
 					className="shadow-xl border-2 border-red-300 rounded-full p-3 w-1/2 md:w-1/6"
-					src={testImg}
+					src={usrprofile}
 					alt={"profileImg"}
 				/>
 				<div className="p-3">
