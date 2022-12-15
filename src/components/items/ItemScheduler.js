@@ -107,7 +107,7 @@ const ItemSchedule = ({
 				open={open}
 			/>
 
-			<div className="flex justify-center mt-2 space-x-4">
+			<div className="grid grid-flow-row mt-1 items-center max-sm:space-y-2 md:grid-flow-col md:space-x-4">
 				<EditObjetive
 					schedulerId={id}
 					objetive={objetive !== null ? objetive : ""}

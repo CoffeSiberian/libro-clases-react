@@ -40,8 +40,8 @@ const ItemStudentQualifi = ({ rut, name, lessonId }) => {
 				flexItem
 			/>
 
-			<div className="flex justify-center mt-1">
-				<Link to={`/qualification/${rut}/${lessonId}`}>
+			<div className="grid grid-flow-col mt-1">
+				<Link className="grid" to={`/qualification/${rut}/${lessonId}`}>
 					<Button variant="outlined" endIcon={<NoteAltIcon />}>
 						Ver Notas
 					</Button>

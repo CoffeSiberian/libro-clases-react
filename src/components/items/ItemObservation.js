@@ -47,8 +47,8 @@ const ItemObservation = ({ date, observation }) => {
 				handleClose={() => setOpen(false)}
 				open={open}
 			/>
-			
-			<div className="flex justify-center mt-2">
+
+			<div className="grid mt-2">
 				<Button
 					endIcon={<VisibilityIcon />}
 					variant="outlined"

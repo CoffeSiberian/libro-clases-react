@@ -40,10 +40,10 @@ const ItemStudent = ({ rut, name }) => {
 				flexItem
 			/>
 
-			<div className="flex justify-center mt-1">
-				<Link to={"/observation/" + rut}>
+			<div className="grid mt-1">
+				<Link className="grid" to={"/observation/" + rut}>
 					<Button variant="outlined" endIcon={<NoteAltIcon />}>
-						observaciones
+						Observaciones
 					</Button>
 				</Link>
 			</div>

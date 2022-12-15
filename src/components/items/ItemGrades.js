@@ -56,8 +56,8 @@ const ItemGrades = ({ id, name, count }) => {
 				flexItem
 			/>
 			
-			<div className="flex justify-center mt-1">
-				<Link to={"/students/"+id}>
+			<div className="grid mt-1">
+				<Link className="grid" to={"/students/"+id}>
 					<Button variant="outlined" endIcon={<GroupIcon />}>
 						Ver Alumnos
 					</Button>

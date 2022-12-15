@@ -66,7 +66,7 @@ const EditObjetive = ({ reload, schedulerId, objetive }) => {
 	};
 
 	return (
-		<div>
+		<div className="grid">
 			<Button
 				endIcon={<EditIcon />}
 				variant="outlined"
