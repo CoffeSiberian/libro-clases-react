@@ -13,10 +13,13 @@ const AlertModal = ({ title, description, handleClose, open }) => {
 				keepMounted
 				onClose={handleClose}
 				aria-describedby="alertInfo"
+				scroll={"paper"}
 			>
 				<DialogTitle>{title}</DialogTitle>
 				<DialogContent>
-					<DialogContentText id="alertInfo">{description}</DialogContentText>
+					<DialogContentText sx={{ wordBreak: "break-word" }} id="alertInfo">
+						{description}
+					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose}>Cerrar</Button>

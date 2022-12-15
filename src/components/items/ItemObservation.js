@@ -1,5 +1,9 @@
+import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
+import AlertModal from "../AlertModal";
+import Button from "@mui/material/Button";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const ItemObservation = ({ date, observation }) => {
 	const options = {
@@ -12,10 +16,9 @@ const ItemObservation = ({ date, observation }) => {
 	};
 
 	const dateStartObj = new Date(date).toLocaleDateString("es-CL", options);
-	const HourStartObj = new Date(date).toLocaleTimeString(
-		"es-CL",
-		optionsHour
-	);
+	const HourStartObj = new Date(date).toLocaleTimeString("es-CL", optionsHour);
+
+	const [open, setOpen] = useState(false);
 
 	return (
 		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
@@ -38,13 +41,21 @@ const ItemObservation = ({ date, observation }) => {
 				flexItem
 			/>
 
-			<div className="grid grid-cols-1 items-center">
-				<Typography className="text-center" variant="subtitle1">
-					Observación:
-				</Typography>
-				<div>
-					<Typography className="text-center" variant="body2">{observation}</Typography>
-				</div>
+			<AlertModal
+				title="Observación"
+				description={observation}
+				handleClose={() => setOpen(false)}
+				open={open}
+			/>
+			
+			<div className="flex justify-center mt-2">
+				<Button
+					endIcon={<VisibilityIcon />}
+					variant="outlined"
+					onClick={() => setOpen(true)}
+				>
+					Ver Observación
+				</Button>
 			</div>
 		</div>
 	);

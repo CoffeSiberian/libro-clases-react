@@ -1,6 +1,10 @@
+import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
 import EditObjetive from "../ModalsForms/EditObjetive";
+import AlertModal from "../AlertModal";
+import Button from "@mui/material/Button";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const ItemSchedule = ({
 	id,
@@ -26,6 +30,8 @@ const ItemSchedule = ({
 		optionsHour
 	);
 	const HourEndObj = new Date(dateEnd).toLocaleTimeString("es-CL", optionsHour);
+
+	const [open, setOpen] = useState(false);
 
 	return (
 		<div className="shadow-xl m-5 p-2 border-2 border-inherit rounded-md">
@@ -87,31 +93,33 @@ const ItemSchedule = ({
 				flexItem
 			/>
 
-			<Typography className="text-center" variant="subtitle1">
-				Objetivo de clase
-			</Typography>
-			{objetive !== null ? (
-				<Typography className="text-center" variant="body2">
-					{objetive}
-				</Typography>
-			) : (
-				<Typography className="text-center" variant="body2">
-					No definido
-				</Typography>
-			)}
-
 			<Divider
 				className="flex"
 				orientation="horizontal"
 				variant="middle"
 				flexItem
 			/>
-			<div className="flex justify-center mt-2">
+
+			<AlertModal
+				title="Objetivo de clase"
+				description={objetive !== null ? objetive : "No definido"}
+				handleClose={() => setOpen(false)}
+				open={open}
+			/>
+
+			<div className="flex justify-center mt-2 space-x-4">
 				<EditObjetive
 					schedulerId={id}
 					objetive={objetive !== null ? objetive : ""}
 					reload={reload}
 				/>
+				<Button
+					endIcon={<VisibilityIcon />}
+					variant="outlined"
+					onClick={() => setOpen(true)}
+				>
+					Ver Objetivo
+				</Button>
 			</div>
 		</div>
 	);
