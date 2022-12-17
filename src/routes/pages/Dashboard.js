@@ -3,7 +3,6 @@ import { Typography } from "@mui/material";
 import DashOptions from "../../components/DashOptios";
 import addEmplo from "../../static/img/addEmplo.png";
 import addLess from "../../static/img/addLess.png";
-import addStud from "../../static/img/addStud.png";
 import viewGrad from "../../static/img/viewGrad.png";
 import rutFormater from "../../helpers/rutFormat";
 import usrprofile from "../../static/img/usrprofile.png";
@@ -31,9 +30,9 @@ const Director = [
 
 const Teacher = [
 	{
-		name: "Alumnos",
-		href: "/students",
-		img: addStud,
+		name: "Cursos",
+		href: "/grades",
+		img: viewGrad,
 		btnColor: "info",
 	},
 	{
@@ -46,9 +45,9 @@ const Teacher = [
 
 const Inspector = [
 	{
-		name: "Empleados",
-		href: "/employes",
-		img: addEmplo,
+		name: "Cursos",
+		href: "/grades",
+		img: viewGrad,
 		btnColor: "info",
 	},
 	{
@@ -79,7 +78,7 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div>
+		<div className="flex flex-col items-center">
 			<div className="flex justify-center items-center flex-col p-3 md:flex-row">
 				<img
 					className="shadow-xl border-2 border-red-300 rounded-full p-3 w-1/2 md:w-1/6"

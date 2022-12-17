@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,12 +7,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
+import GradesBar from "./GradesBar";
 
 const AddGrade = ({ reload }) => {
 	const baseData = {
@@ -23,7 +20,6 @@ const AddGrade = ({ reload }) => {
 		name: false,
 	};
 
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
@@ -74,26 +70,14 @@ const AddGrade = ({ reload }) => {
 
 	return (
 		<div>
-			<Typography className="md:hidden flex justify-center" variant="h5">
-				Cursos
-			</Typography>
-			<div className="flex items-center justify-between mt-3 mr-3">
-				<Typography
-					className="hidden md:flex absolute w-full justify-center"
-					variant="h5"
-				>
-					Cursos
-				</Typography>
-				<IconButton
-					aria-label="delete"
-					onClick={() => navigate("/dashboard", { replace: true })}
-				>
-					<ArrowBackIcon />
-				</IconButton>
-				<Button variant="contained" onClick={() => setOpen(true)}>
-					Agregar Curso
-				</Button>
-			</div>
+			<GradesBar
+				button={
+					<Button variant="contained" onClick={() => setOpen(true)}>
+						Agregar Curso
+					</Button>
+				}
+			/>
+
 			<Dialog
 				open={open}
 				keepMounted

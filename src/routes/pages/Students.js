@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
 import EmpyData from "../../components/EmpyData";
 import ItemStudent from "../../components/items/ItemStudent";
 import AddStudent from "../../components/ModalsForms/AddStudent";
+import StudentsBar from "../../components/ModalsForms/StudentsBar";
 
 const Student = () => {
 	const { id } = useParams();
@@ -13,6 +15,9 @@ const Student = () => {
 	const loaded = useRef(false);
 	const gradeName = useRef();
 	const [listStudent, setListStudent] = useState(false);
+
+	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const user_rank = jwt_obj.rank;
 
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
@@ -43,11 +48,15 @@ const Student = () => {
 
 	return (
 		<div>
-			<AddStudent
-				reload={getStudent}
-				gradeId={id}
-				gradeName={gradeName.current}
-			/>
+			{user_rank === 1 ? (
+				<StudentsBar gradeName={gradeName.current} />
+			) : (
+				<AddStudent
+					reload={getStudent}
+					gradeId={id}
+					gradeName={gradeName.current}
+				/>
+			)}
 			{!listStudent && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
