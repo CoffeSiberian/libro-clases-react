@@ -87,7 +87,7 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 	};
 	return (
 		<div>
-			{user_rank === 1 || user_rank === 2 ? (
+			{user_rank === 2 ? (
 				<QualificationBar
 					rut={rut}
 					lessonName={lessonName}

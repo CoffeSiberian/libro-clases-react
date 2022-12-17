@@ -5,6 +5,7 @@ import EditObjetive from "../ModalsForms/EditObjetive";
 import AlertModal from "../AlertModal";
 import Button from "@mui/material/Button";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import getTokenData from "../../helpers/getTokenData";
 
 const ItemSchedule = ({
 	id,
@@ -15,6 +16,8 @@ const ItemSchedule = ({
 	objetive,
 	reload,
 }) => {
+	const jwt_obj = getTokenData();
+	const user_rank = jwt_obj.rank;
 	const options = {
 		dateStyle: "full",
 	};
@@ -108,11 +111,16 @@ const ItemSchedule = ({
 			/>
 
 			<div className="grid grid-flow-row mt-1 items-center max-sm:space-y-2 md:grid-flow-col md:space-x-4">
-				<EditObjetive
-					schedulerId={id}
-					objetive={objetive !== null ? objetive : ""}
-					reload={reload}
-				/>
+				{user_rank === 2 ? (
+					<></>
+				) : (
+					<EditObjetive
+						schedulerId={id}
+						objetive={objetive !== null ? objetive : ""}
+						reload={reload}
+					/>
+				)}
+
 				<Button
 					endIcon={<VisibilityIcon />}
 					variant="outlined"
