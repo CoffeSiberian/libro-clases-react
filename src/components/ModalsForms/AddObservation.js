@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,14 +7,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
+import ObservationBar from "./ObservationBar";
+import getTokenData from "../../helpers/getTokenData";
 
 const AddObservation = ({ reload, rut, name, gradeId }) => {
+	const jwt_obj = getTokenData()
+	const user_rank = jwt_obj.rank;
 	const baseData = {
 		observation: "",
 		fk_student: rut,
@@ -25,7 +25,6 @@ const AddObservation = ({ reload, rut, name, gradeId }) => {
 		fk_student: false,
 	};
 
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
@@ -76,26 +75,20 @@ const AddObservation = ({ reload, rut, name, gradeId }) => {
 
 	return (
 		<div>
-			<Typography className="md:hidden flex justify-center" variant="h5">
-				{name}
-			</Typography>
-			<div className="flex items-center justify-between mt-3 mr-3">
-				<Typography
-					className="hidden md:flex absolute w-full justify-center"
-					variant="h5"
-				>
-					{name}
-				</Typography>
-				<IconButton
-					aria-label="Return"
-					onClick={() => navigate(`/students/${gradeId}`, { replace: true })}
-				>
-					<ArrowBackIcon />
-				</IconButton>
-				<Button variant="contained" onClick={() => setOpen(true)}>
-					Agregar Observación
-				</Button>
-			</div>
+			{user_rank === 2 ? (
+				<ObservationBar name={name} gradeId={gradeId} />
+			) : (
+				<ObservationBar
+					name={name}
+					gradeId={gradeId}
+					button={
+						<Button variant="contained" onClick={() => setOpen(true)}>
+							Agregar Observación
+						</Button>
+					}
+				/>
+			)}
+
 			<Dialog
 				open={open}
 				keepMounted

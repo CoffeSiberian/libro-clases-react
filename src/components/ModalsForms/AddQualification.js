@@ -14,7 +14,7 @@ import QualificationBar from "./QualificationBar";
 import getTokenData from "../../helpers/getTokenData";
 
 const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
-	const jwt_obj = getTokenData()
+	const jwt_obj = getTokenData();
 	const user_rank = jwt_obj.rank;
 	const baseData = {
 		score: "",
@@ -85,7 +85,6 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 		setData(baseData);
 		setDataErr(baseErrData);
 	};
-console.log(user_rank)
 	return (
 		<div>
 			{user_rank === 1 || user_rank === 2 ? (
