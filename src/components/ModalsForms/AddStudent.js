@@ -12,6 +12,7 @@ import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
 import StudentsBar from "./StudentsBar";
 import rutFormater from "../../helpers/rutFormat";
+import { validate } from "rut.js";
 
 const AddStudent = ({ reload, gradeId, gradeName }) => {
 	const baseData = {
@@ -48,10 +49,14 @@ const AddStudent = ({ reload, gradeId, gradeName }) => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
 		let expression = /[0-9]+/;
+		let expressionK = /k+/i;
 		if (event.nativeEvent.data === null) {
 			return setData({ ...data, [eId]: rutFormater(eValue) });
 		}
 		if (event.nativeEvent.data.match(expression)) {
+			return setData({ ...data, [eId]: rutFormater(eValue) });
+		}
+		if (event.nativeEvent.data.match(expressionK)) {
 			return setData({ ...data, [eId]: rutFormater(eValue) });
 		}
 	};
@@ -64,6 +69,10 @@ const AddStudent = ({ reload, gradeId, gradeName }) => {
 				err[r] = true;
 				returnErr = true;
 			} else err[r] = false;
+		}
+		if (!validate(data.rut)) {
+			err.rut = true;
+			returnErr = true;
 		}
 		setDataErr(err);
 		return returnErr;

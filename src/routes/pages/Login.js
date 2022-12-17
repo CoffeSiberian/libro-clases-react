@@ -36,10 +36,14 @@ const Login = () => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
 		let expression = /[0-9]+/;
+		let expressionK = /k+/i;
 		if (event.nativeEvent.data === null) {
 			return setData({ ...data, [eId]: rutFormater(eValue) });
 		}
 		if (event.nativeEvent.data.match(expression)) {
+			return setData({ ...data, [eId]: rutFormater(eValue) });
+		}
+		if (event.nativeEvent.data.match(expressionK)) {
 			return setData({ ...data, [eId]: rutFormater(eValue) });
 		}
 	};
