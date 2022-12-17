@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import jwt_decode from "jwt-decode";
 import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
 import EmpyData from "../../components/EmpyData";
 import ItemGrades from "../../components/items/ItemGrades";
 import AddGrade from "../../components/ModalsForms/AddGrades";
 import GradesBar from "../../components/ModalsForms/GradesBar";
+import getTokenData from "../../helpers/getTokenData";
 
 const Grades = () => {
 	const loaded = useRef(false);
 	const [listGrades, setListGrades] = useState(false);
 
-	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const jwt_obj = getTokenData()
 	const user_rank = jwt_obj.rank;
 	const user_rut = jwt_obj.rut;
 
@@ -45,7 +45,11 @@ const Grades = () => {
 
 	return (
 		<div>
-			{user_rank === 1 ? <GradesBar /> : <AddGrade reload={getGrades} />}
+			{user_rank === 1 || user_rank === 2 ? (
+				<GradesBar />
+			) : (
+				<AddGrade reload={getGrades} />
+			)}
 			{!listGrades && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />

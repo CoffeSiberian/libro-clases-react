@@ -1,4 +1,3 @@
-import jwt_decode from "jwt-decode";
 import { Typography } from "@mui/material";
 import DashOptions from "../../components/DashOptios";
 import addEmplo from "../../static/img/addEmplo.png";
@@ -6,6 +5,7 @@ import addLess from "../../static/img/addLess.png";
 import viewGrad from "../../static/img/viewGrad.png";
 import rutFormater from "../../helpers/rutFormat";
 import usrprofile from "../../static/img/usrprofile.png";
+import getTokenData from "../../helpers/getTokenData";
 
 const Director = [
 	{
@@ -59,7 +59,7 @@ const Inspector = [
 ];
 
 const Dashboard = () => {
-	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const jwt_obj = getTokenData()
 	const user_name = jwt_obj.name;
 	const user_rank = jwt_obj.rank;
 	const user_rut = rutFormater(jwt_obj.rut);

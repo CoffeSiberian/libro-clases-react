@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -8,15 +7,15 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
-import rutFormater from "../../helpers/rutFormat";
+import QualificationBar from "./QualificationBar";
+import getTokenData from "../../helpers/getTokenData";
 
 const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
+	const jwt_obj = getTokenData()
+	const user_rank = jwt_obj.rank;
 	const baseData = {
 		score: "",
 		fk_lesson: lessonId,
@@ -28,7 +27,6 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 		fk_student: false,
 	};
 
-	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
@@ -87,36 +85,30 @@ const AddQualification = ({ reload, rut, lessonName, lessonId, gradeId }) => {
 		setData(baseData);
 		setDataErr(baseErrData);
 	};
-
+console.log(user_rank)
 	return (
 		<div>
-			<Typography className="md:hidden flex justify-center" variant="h5">
-				{rutFormater(rut)}
-			</Typography>
-			<Typography className="md:hidden flex justify-center" variant="h5">
-				{lessonName}
-			</Typography>
-			<div className="flex items-center justify-between mt-3 mr-3">
-				<div className="hidden md:flex absolute w-full justify-center">
-					<div className="flex flex-col items-center">
-						<Typography variant="h5">{rutFormater(rut)}</Typography>
-						<Typography variant="h5">{lessonName}</Typography>
-					</div>
-				</div>
-				<IconButton
-					aria-label="delete"
-					onClick={() =>
-						navigate(`/studentsQualifi/${gradeId}/${lessonId}`, {
-							replace: true,
-						})
+			{user_rank === 1 || user_rank === 2 ? (
+				<QualificationBar
+					rut={rut}
+					lessonName={lessonName}
+					lessonId={lessonId}
+					gradeId={gradeId}
+				/>
+			) : (
+				<QualificationBar
+					rut={rut}
+					lessonName={lessonName}
+					lessonId={lessonId}
+					gradeId={gradeId}
+					button={
+						<Button variant="contained" onClick={() => setOpen(true)}>
+							Agregar Nota
+						</Button>
 					}
-				>
-					<ArrowBackIcon />
-				</IconButton>
-				<Button variant="contained" onClick={() => setOpen(true)}>
-					Agregar Nota
-				</Button>
-			</div>
+				/>
+			)}
+
 			<Dialog
 				open={open}
 				keepMounted

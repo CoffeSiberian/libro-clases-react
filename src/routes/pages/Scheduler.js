@@ -7,7 +7,7 @@ import ItemSchedule from "../../components/items/ItemScheduler";
 import EmpyData from "../../components/EmpyData";
 import AddScheduler from "../../components/ModalsForms/AddScheduler";
 import SchedulerBar from "../../components/ModalsForms/SchedulerBar";
-import jwt_decode from "jwt-decode";
+import getTokenData from "../../helpers/getTokenData";
 
 const Scheduler = () => {
 	const { id } = useParams();
@@ -15,7 +15,7 @@ const Scheduler = () => {
 	const loaded = useRef(false);
 	const [listScheduler, setListScheduler] = useState(false);
 
-	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const jwt_obj = getTokenData();
 	const user_rank = jwt_obj.rank;
 
 	// eslint-disable-next-line
@@ -45,7 +45,7 @@ const Scheduler = () => {
 
 	return (
 		<div>
-			{user_rank === 1 ? (
+			{user_rank === 1 || user_rank === 2 ? (
 				<SchedulerBar />
 			) : (
 				<AddScheduler reload={getScheduler} id={id} />

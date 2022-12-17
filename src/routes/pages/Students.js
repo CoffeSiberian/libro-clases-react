@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import useFetch from "../../hooks/useFetch";
 import { getLocalToken } from "../../helpers/validateToken";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,6 +7,7 @@ import EmpyData from "../../components/EmpyData";
 import ItemStudent from "../../components/items/ItemStudent";
 import AddStudent from "../../components/ModalsForms/AddStudent";
 import StudentsBar from "../../components/ModalsForms/StudentsBar";
+import getTokenData from "../../helpers/getTokenData";
 
 const Student = () => {
 	const { id } = useParams();
@@ -16,7 +16,7 @@ const Student = () => {
 	const gradeName = useRef();
 	const [listStudent, setListStudent] = useState(false);
 
-	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const jwt_obj = getTokenData();
 	const user_rank = jwt_obj.rank;
 
 	// eslint-disable-next-line
@@ -48,7 +48,7 @@ const Student = () => {
 
 	return (
 		<div>
-			{user_rank === 1 ? (
+			{user_rank === 1 || user_rank === 2 ? (
 				<StudentsBar gradeName={gradeName.current} />
 			) : (
 				<AddStudent

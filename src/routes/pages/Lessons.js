@@ -1,24 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import jwt_decode from "jwt-decode";
 import { getLocalToken } from "../../helpers/validateToken";
 import ItemLessons from "../../components/items/ItemLessons";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddLesson from "../../components/ModalsForms/AddLesson";
 import EmpyData from "../../components/EmpyData";
 import LessonsBar from "../../components/ModalsForms/LessonsBar";
+import getTokenData from "../../helpers/getTokenData";
 
 const Lessons = () => {
 	const loaded = useRef(false);
 	const [listLessons, setListLessons] = useState(false);
 
-	const jwt_obj = jwt_decode(localStorage.getItem("token"));
+	const jwt_obj = getTokenData()
 	const user_rank = jwt_obj.rank;
 	const user_rut = jwt_obj.rut;
 
 	// eslint-disable-next-line
 	const [loading, error, succes, bodySet, setError, setSucces] = useFetch(
-		`${process.env.REACT_APP_APIURL}${user_rank === 1 ? `/getteacherlessons/${user_rut}` : "/getalllessons"}`,
+		`${process.env.REACT_APP_APIURL}${
+			user_rank === 1 ? `/getteacherlessons/${user_rut}` : "/getalllessons"
+		}`,
 		"GET",
 		{
 			"Content-Type": "application/json",
@@ -43,7 +45,11 @@ const Lessons = () => {
 
 	return (
 		<div>
-			{user_rank === 1 ? <LessonsBar /> : <AddLesson reload={getAllLessons} />}
+			{user_rank === 1 || user_rank === 2 ? (
+				<LessonsBar />
+			) : (
+				<AddLesson reload={getAllLessons} />
+			)}
 			{!listLessons && !error ? (
 				<div className="flex justify-center mt-6">
 					<CircularProgress />
