@@ -55,7 +55,13 @@ const AddEmployee = ({ reload }) => {
 	const handleChangeTextUser = (event) => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
-		setData({ ...data, [eId]: rutFormater(eValue) });
+		let expression = /[0-9]+/;
+		if (event.nativeEvent.data === null) {
+			return setData({ ...data, [eId]: rutFormater(eValue) });
+		}
+		if (event.nativeEvent.data.match(expression)) {
+			return setData({ ...data, [eId]: rutFormater(eValue) });
+		}
 	};
 
 	const checkTextError = () => {
