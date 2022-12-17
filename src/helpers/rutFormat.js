@@ -17,8 +17,9 @@ const rutFormater = (rut) => {
 		}
 		var dv = actualLimpio.substring(actualLimpio.length - 1);
 		rutPuntos = rutPuntos + "-" + dv;
+		return rutPuntos;
 	}
-	return rutPuntos;
+	return rut;
 };
 
 export default rutFormater;

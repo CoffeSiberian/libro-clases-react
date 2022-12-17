@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import Divider from "@mui/material/Divider";
 import { Typography } from "@mui/material";
-import rutFormater from "../../helpers/rutFormat";
 
 const ItemStudentQualifi = ({ rut, name, lessonId }) => {
 	return (
@@ -13,7 +12,7 @@ const ItemStudentQualifi = ({ rut, name, lessonId }) => {
 					RUT:
 				</Typography>
 				<div className="ml-2">
-					<Typography variant="body2">{rutFormater(rut)}</Typography>
+					<Typography variant="body2">{rut}</Typography>
 				</div>
 			</div>
 

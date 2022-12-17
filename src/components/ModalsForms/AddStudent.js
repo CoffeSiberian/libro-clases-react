@@ -11,6 +11,7 @@ import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
 import StudentsBar from "./StudentsBar";
+import rutFormater from "../../helpers/rutFormat";
 
 const AddStudent = ({ reload, gradeId, gradeName }) => {
 	const baseData = {
@@ -41,6 +42,12 @@ const AddStudent = ({ reload, gradeId, gradeName }) => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
 		setData({ ...data, [eId]: eValue });
+	};
+
+	const handleChangeTextUser = (event) => {
+		let eId = event.target.attributes.id.value;
+		let eValue = event.target.value;
+		setData({ ...data, [eId]: rutFormater(eValue) });
 	};
 
 	const checkTextError = () => {
@@ -109,7 +116,7 @@ const AddStudent = ({ reload, gradeId, gradeName }) => {
 							variant="outlined"
 							label="RUT"
 							value={data.rut}
-							onChange={handleChangeText}
+							onChange={handleChangeTextUser}
 							error={dataErr.rut}
 						/>
 						<TextField

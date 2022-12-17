@@ -3,7 +3,6 @@ import DashOptions from "../../components/DashOptios";
 import addEmplo from "../../static/img/addEmplo.png";
 import addLess from "../../static/img/addLess.png";
 import viewGrad from "../../static/img/viewGrad.png";
-import rutFormater from "../../helpers/rutFormat";
 import usrprofile from "../../static/img/usrprofile.png";
 import getTokenData from "../../helpers/getTokenData";
 
@@ -62,7 +61,7 @@ const Dashboard = () => {
 	const jwt_obj = getTokenData()
 	const user_name = jwt_obj.name;
 	const user_rank = jwt_obj.rank;
-	const user_rut = rutFormater(jwt_obj.rut);
+	const user_rut = jwt_obj.rut;
 
 	const rankName = () => {
 		switch (user_rank) {

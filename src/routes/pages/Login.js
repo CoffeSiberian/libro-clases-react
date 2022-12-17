@@ -4,6 +4,7 @@ import testlogo from "../../static/img/testlogo.webp";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import LoginButton from "../../components/LoginButton";
+import rutFormater from "../../helpers/rutFormat";
 
 const Login = () => {
 	const baseData = {
@@ -29,6 +30,12 @@ const Login = () => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
 		setData({ ...data, [eId]: eValue });
+	};
+
+	const handleChangeTextUser = (event) => {
+		let eId = event.target.attributes.id.value;
+		let eValue = event.target.value;
+		setData({ ...data, [eId]: rutFormater(eValue) });
 	};
 
 	const checkTextError = () => {
@@ -60,7 +67,7 @@ const Login = () => {
 					required
 					id="rut"
 					value={data.rut}
-					onChange={handleChangeText}
+					onChange={handleChangeTextUser}
 					error={dataErr.rut}
 					label="RUT"
 					type="text"

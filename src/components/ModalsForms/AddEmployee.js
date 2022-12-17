@@ -15,6 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import { getLocalToken } from "../../helpers/validateToken";
 import ModalLoading from "../ModalLoading";
 import AlertModal from "../AlertModal";
+import rutFormater from "../../helpers/rutFormat";
 
 const AddEmployee = ({ reload }) => {
 	const baseData = {
@@ -49,6 +50,12 @@ const AddEmployee = ({ reload }) => {
 		let eId = event.target.attributes.id.value;
 		let eValue = event.target.value;
 		setData({ ...data, [eId]: eValue });
+	};
+
+	const handleChangeTextUser = (event) => {
+		let eId = event.target.attributes.id.value;
+		let eValue = event.target.value;
+		setData({ ...data, [eId]: rutFormater(eValue) });
 	};
 
 	const checkTextError = () => {
@@ -132,7 +139,7 @@ const AddEmployee = ({ reload }) => {
 							variant="outlined"
 							label="RUT"
 							value={data.rut}
-							onChange={handleChangeText}
+							onChange={handleChangeTextUser}
 							error={dataErr.rut}
 						/>
 						<TextField
