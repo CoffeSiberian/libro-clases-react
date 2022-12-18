@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Error404 from "./pages/Error404";
 import ValidUser from "../components/ValidUser";
 import Heder from "../components/Heder";
 import Login from "./pages/Login";
@@ -99,7 +98,7 @@ const RoutePage = () => {
 						</ValidUser>
 					}
 				/>
-				<Route path="*" element={<Error404 />} />
+				<Route path="*" element={<Login />} />
 			</Routes>
 		</Router>
 	);

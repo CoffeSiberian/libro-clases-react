@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
+import ModalLoading from "../../components/ModalLoading";
+import useValidUser from "../../hooks/useValidUser";
 import TextField from "@mui/material/TextField";
 import testlogo from "../../static/img/testlogo.webp";
 import Checkbox from "@mui/material/Checkbox";
@@ -19,6 +22,8 @@ const Login = () => {
 	const [togglePass, setTogglePass] = useState("password");
 	const [data, setData] = useState(baseData);
 	const [dataErr, setDataErr] = useState(baseErrData);
+
+	const [loading, aut] = useValidUser();
 
 	const checkTogglePass = (event) => {
 		let status = event.target.checked;
@@ -61,6 +66,9 @@ const Login = () => {
 		return returnErr;
 	};
 
+	if (aut === true) {
+		return <Navigate to={"/dashboard"} replace={true} />;
+	} else if (aut === null) return <ModalLoading open={loading} />;
 	return (
 		<div className="flex w-full mt-5 flex-col items-center md:flex-row md:justify-center">
 			<div className="p-1">
