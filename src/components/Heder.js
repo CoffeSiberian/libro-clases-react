@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Divider from "@mui/material/Divider";
@@ -11,7 +12,9 @@ const Heder = () => {
 			<Toolbar disableGutters>
 				<div className="flex flex-row w-full h-16 p-2">
 					<div className="flex items-center w-full space-x-2">
-						<Typography color="white">Sistema Escolar</Typography>
+						<Link to="/dashboard">
+							<Typography color="white">Sistema Escolar</Typography>
+						</Link>
 						<Divider orientation="vertical" />
 					</div>
 					<div className="md:flex hidden w-full justify-end md:justify-center">
