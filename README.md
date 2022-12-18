@@ -14,3 +14,7 @@ The usable commands are
 Requirements *(based on what was used for development)*
 
 - Node.js v18.11.0
+
+##### Environment Variables
+
+`REACT_APP_APIURL="http://apiurl.api"`
