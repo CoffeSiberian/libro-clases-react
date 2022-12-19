@@ -10,7 +10,7 @@ const LessonEmployeeSelect = ({ data, change, error }) => {
 
 	// eslint-disable-next-line
 	const [loadingEmp, errorEmp, succesEmp, bodySetEmp] = useFetch(
-		`${process.env.REACT_APP_APIURL}/getallemployee`,
+		`${process.env.REACT_APP_APIURL}/getonlyteachers`,
 		"GET",
 		{
 			"Content-Type": "application/json",
