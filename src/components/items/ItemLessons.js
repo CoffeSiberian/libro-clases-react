@@ -86,7 +86,7 @@ const ItemLessons = ({
 				</Link>
 				<Link className="grid" to={`/studentsQualifi/${GradeId}/${id}`}>
 					<Button variant="outlined" endIcon={<GradeIcon />}>
-						Calificaiones
+						Calificaciones
 					</Button>
 				</Link>
 			</div>
