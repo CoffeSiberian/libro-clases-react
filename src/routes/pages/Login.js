@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import ModalLoading from "../../components/ModalLoading";
+import ExampleDatas from "../../components/ExampleDatas";
 import useValidUser from "../../hooks/useValidUser";
 import TextField from "@mui/material/TextField";
 import testlogo from "../../static/img/testlogo.webp";
@@ -111,6 +112,7 @@ const Login = () => {
 					></LoginButton>
 				</div>
 			</div>
+			<ExampleDatas />
 		</div>
 	);
 };
